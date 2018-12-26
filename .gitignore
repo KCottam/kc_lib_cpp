@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+/kc_lib_cpp.vcxproj.user
+/kc_lib_cpp.vcxproj.filters
+/kc_lib_cpp.vcxproj
+/kc_lib_cpp.VC.VC.opendb
+/kc_lib_cpp.VC.db
+/kc_lib_cpp.sln
+/.vs/kc_lib_cpp/v14/.suo
+/.vs/kc_lib_cpp/v14
+/.gitattributes
