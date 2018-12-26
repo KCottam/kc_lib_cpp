@@ -84,6 +84,12 @@ kc::controller::get_key(*int,int)
 	Gets a key that a user presses and returns it. Similar to _getch(), but modified.
 	The second parameter is a delay in ms. Use 0 for no delay.
 
+kc::controller::toUpper(char), kc::controller::toUpper(char *)
+	Capitalizes a string or char.
+
+kc::controller::toLower(char), kc::controller::toLower(char *)
+	Lowercases a string or char.
+
 /////////////////////////////////////////////////////////////////////////////
 Other notes:
 
