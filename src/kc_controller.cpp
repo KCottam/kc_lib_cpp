@@ -9,17 +9,17 @@ int kc::controller::get_key(int * flag, int delay)
 		while (time(NULL) <= currentTime + delay) {}
 	}
 	int key = _getch();
-	if (key == KC_ESCAPE_CHARACTER_CODE)
+	if (key == RETURN)
 	{
-		*flag = KC_ESCAPE_CHARACTER_CODE;
+		*flag = ESCAPE;
 		return get_key(flag, 0);
 	}
-	if (key == KC_NUMPAD_CHARACTER_CODE)
+	if (key == NUMPAD)
 	{
-		*flag = KC_NUMPAD_CHARACTER_CODE;
+		*flag = NUMPAD;
 		return get_key(flag, 0);
 	}
-	else if (*flag == KC_ESCAPE_CHARACTER_CODE || *flag == KC_NUMPAD_CHARACTER_CODE)
+	else if (*flag == ESCAPE || *flag == NUMPAD)
 	{
 		switch (key)
 		{
@@ -49,11 +49,11 @@ int kc::controller::get_key(int * flag, int delay)
 	}
 	else if (key == '\r')
 	{
-		*flag = KC_RETURN_CHARACTER_CODE;
+		*flag = RETURN;
 	}
 	else
 	{
-		*flag = KC_NORMAL_CHARACTER_CODE;
+		*flag = RETURN;
 	}
 	return key;
 }

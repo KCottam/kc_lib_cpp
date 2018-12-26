@@ -39,3 +39,13 @@
 /.vs/kc_lib_cpp/v14/.suo
 /.vs/kc_lib_cpp/v14
 /.gitattributes
+/Debug/kc_lib_cpp.tlog/lib.command.1.tlog
+/Debug/kc_lib_cpp.tlog/Lib-link.write.1.tlog
+/Debug/kc_lib_cpp.tlog/Lib-link.read.1.tlog
+/Debug/kc_lib_cpp.tlog/kc_lib_cpp.lastbuildstate
+/Debug/kc_lib_cpp.tlog/CL.write.1.tlog
+/Debug/kc_lib_cpp.tlog/CL.read.1.tlog
+/Debug/kc_lib_cpp.tlog/CL.command.1.tlog
+/Debug/kc_lib_cpp.pdb
+/Debug/kc_lib_cpp.log
+/Debug/kc_lib_cpp.idb
