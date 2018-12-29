@@ -8,7 +8,7 @@ Other notes
 CHANGELOG
 /////////////////////////////////////////////////////////////////////////////
 ========================================================================
-	STATIC LIBRARY : kc_lib_cpp Project Overview (Version 1.0.2)
+	STATIC LIBRARY : kc_lib_cpp Project Overview (Version 1.0.3)
 ========================================================================
 
 kc_core.h, kc_core.cpp
@@ -161,7 +161,10 @@ Other notes:
 I use "TODO:" comments to indicate parts of the source code I am planning to add to or customize.
 
 /////////////////////////////////////////////////////////////////////////////
-CHANGELOG 1.0.1
+CHANGELOG 1.0.3
+	Adds XML Documentation.
+
+CHANGELOG 1.0.2
 	Made main() into just a setup function, kc::core::SetupKCLib
 	Added beginnings of Lists module.
 	Reformatted comments to have a space between the text and the double slashes, 
