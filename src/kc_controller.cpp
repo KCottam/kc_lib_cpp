@@ -1,6 +1,12 @@
 #include <ctime>
 #include <conio.h>
 #include "kc_controller.h"
+/// <summary>
+/// Gets a key press from the user.
+/// </summary>
+/// <param name="flag">The "flag" variable that shows where the keypress came from.</param>
+/// <param name="delay">A delay between keypresses.</param>
+/// <returns></returns>
 int kc::controller::get_key(int * flag, int delay)
 {
 	if (delay)

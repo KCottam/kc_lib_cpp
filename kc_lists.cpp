@@ -1,44 +1,69 @@
 #include "kc_lists.h"
-
+/// <summary>
+/// Initializes a node of a linked list.
+/// </summary>
 kc::Node::Node(void) : data{ 0 }, next{ 0 }, previous{ 0 }
 {
 }
-
+/// <summary>
+/// Initializes a node of a linked list with <see cref="data"/>,
+/// </summary>
+/// <param name="data">The to-be data of the node.</param>
 kc::Node::Node(void * data) : data{ data }, next{ 0 }, previous{ 0 }
 {
 }
-
+/// <summary>
+/// Gets the data of a node.
+/// </summary>
+/// <returns>The node's data</returns>
 void * kc::Node::getData(void)
 {
 	return data;
 }
-
+/// <summary>
+/// Sets the data of a node to <see cref="data"/>.
+/// </summary>
+/// <param name="data">The node's to-be data.</param>
 void kc::Node::setData(void * data)
 {
 	this->data = data;
 }
-
+/// <summary>
+/// Gets the next node of the linked list.
+/// </summary>
+/// <returns>The node pointer of the next node in the linked list. 0 if there is none.</returns>
 kc::Node * kc::Node::getNext(void)
 {
 	return next;
 }
-
+/// <summary>
+/// Sets the next node of the linked list to <see cref="node"/>.
+/// </summary>
+/// <param name="node">The node to be set as the next node in the list.</param>
 void kc::Node::setNext(Node * node)
 {
 	this->next = node;
 }
-
+/// <summary>
+/// Gets the previous node of the linked list.
+/// </summary>
+/// <returns>The node to be set as the previous node in the list.</returns>
 kc::Node * kc::Node::getPrevious(void)
 {
 	return previous;
 }
 
-// Gets data variable
+/// <summary>
+/// Sets the previous node of the linked list to <see cref="node"/>.
+/// </summary>
+/// <param name="node">The node to be set as the next node in the list.</param>
 void kc::Node::setPrevious(Node * node)
 {
 	this->previous = node;
 }
-
+/// <summary>
+/// Nothing
+/// </summary>
 kc::Node::~Node(void)
 {
 }
