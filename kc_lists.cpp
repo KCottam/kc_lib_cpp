@@ -24,9 +24,11 @@ void * kc::Node::getData(void)
 /// Sets the data of a node to <see cref="data"/>.
 /// </summary>
 /// <param name="data">The node's to-be data.</param>
-void kc::Node::setData(void * data)
+/// <returns>Itself</returns>
+kc::Node kc::Node::setData(void * data)
 {
 	this->data = data;
+	return this;
 }
 /// <summary>
 /// Gets the next node of the linked list.
@@ -40,9 +42,11 @@ kc::Node * kc::Node::getNext(void)
 /// Sets the next node of the linked list to <see cref="node"/>.
 /// </summary>
 /// <param name="node">The node to be set as the next node in the list.</param>
-void kc::Node::setNext(Node * node)
+/// <returns>Itself</returns>
+kc::Node kc::Node::setNext(Node * node)
 {
 	this->next = node;
+	return this;
 }
 /// <summary>
 /// Gets the previous node of the linked list.
@@ -57,9 +61,11 @@ kc::Node * kc::Node::getPrevious(void)
 /// Sets the previous node of the linked list to <see cref="node"/>.
 /// </summary>
 /// <param name="node">The node to be set as the next node in the list.</param>
-void kc::Node::setPrevious(Node * node)
+/// <returns>Itself</returns>
+kc::Node kc::Node::setPrevious(Node * node)
 {
 	this->previous = node;
+	return this;
 }
 /// <summary>
 /// Nothing
@@ -67,15 +73,24 @@ void kc::Node::setPrevious(Node * node)
 kc::Node::~Node(void)
 {
 }
-
+/// <summary>
+/// Makes a new list with a header node.
+/// </summary>
 kc::List::List(void) : header{ new kc::Node() }
 {
 }
-
+/// <summary>
+/// Makes a new list with a header node that has data.
+/// </summary>
+/// <param name="data">The input data</param>
 kc::List::List(void * data) : header{ new kc::Node(data) }
 {
 }
-
+/// <summary>
+/// Makes a new list with data.
+/// </summary>
+/// <param name="length">How many items are in <see cref="data"/>.</param>
+/// <param name="data">The data of a list.</param>
 kc::List::List(int length, void * data[]) : header{ new kc::Node{data[0]} }
 {
 	Node * traversalNode = header;
@@ -85,12 +100,18 @@ kc::List::List(int length, void * data[]) : header{ new kc::Node{data[0]} }
 		traversalNode = traversalNode->getNext();
 	}
 }
-
+/// <summary>
+/// Gets the header of the list.
+/// </summary>
+/// <returns>The header of the list.</returns>
 kc::Node * kc::List::getHeader(void)
 {
 	return header;
 }
-
+/// <summary>
+/// Gets the length of the list.
+/// </summary>
+/// <returns>The length of the list.</returns>
 int kc::List::length(void)
 {
 	Node * traversalNode = header;
@@ -106,7 +127,10 @@ int kc::List::length(void)
 	}
 	return length;
 }
-
+/// <summary>
+/// Inserts data at the beginning of the list.
+/// </summary>
+/// <param name="data">Data</param>
 void kc::List::push(void * data)
 {
 	Node * previousHeader = header;
@@ -116,7 +140,11 @@ void kc::List::push(void * data)
 		header->setNext(previousHeader);
 	}
 }
-
+/// <summary>
+/// Inserts data at the beginning of the list.
+/// </summary>
+/// <param name="length">How many items are in <see cref="data"/>.</param>
+/// <param name="data">Data</param>
 void kc::List::push(int length, void * data[])
 {
 	for (int i = 0; i < length; i++)
@@ -124,7 +152,10 @@ void kc::List::push(int length, void * data[])
 		push_at(i, data);
 	}
 }
-
+/// <summary>
+/// Inserts data at the end of the list.
+/// </summary>
+/// <param name="data">Data</param>
 void kc::List::append(void * data)
 {
 	if (!header)
@@ -142,7 +173,11 @@ void kc::List::append(void * data)
 	newNode->setPrevious(beforeTraversalNode);
 	beforeTraversalNode->setNext(newNode);
 }
-
+/// <summary>
+/// Inserts data at the end of the list.
+/// </summary>
+/// <param name="length">How many items are in <see cref="data"/>.</param>
+/// <param name="data">Data</param>
 void kc::List::append(int length, void * data[])
 {
 	for (int i = 0; i < length; i++)
@@ -150,7 +185,11 @@ void kc::List::append(int length, void * data[])
 		append(data);
 	}
 }
-
+/// <summary>
+/// Inserts data at the specified <see cref="index"/> of the list.
+/// </summary>
+/// <param name="data">Data</param>
+/// <param name="index"></param>
 void kc::List::push_at(int index, void * data)
 {
 	Node * traversalNode = header;
@@ -171,7 +210,12 @@ void kc::List::push_at(int index, void * data)
 		traversalNode->setNext(newNode);
 	}
 }
-
+/// <summary>
+/// Inserts data at the specified <see cref="index"/> of the list.
+/// </summary>
+/// <param name="index">Specified index of the list.</param>
+/// <param name="length">How many items are in <see cref="data"/>.</param>
+/// <param name="data">Data</param>
 void kc::List::push_at(int index, int length, void * data[])
 {
 	for (int i = 0; i < length; i++)
@@ -179,7 +223,10 @@ void kc::List::push_at(int index, int length, void * data[])
 		push_at(index + i, data[i]);
 	}
 }
-
+/// <summary>
+/// Gets data from the beginning of the list and destroys the node.
+/// </summary>
+/// <returns>Data</returns>
 void * kc::List::pull(void)
 {
 	if (!header)
@@ -190,7 +237,10 @@ void * kc::List::pull(void)
 	delete oldHeader;
 	return data;
 }
-
+/// <summary>
+/// Gets data from the end of the list and destroys the node.
+/// </summary>
+/// <returns>Data</returns>
 void * kc::List::pop(void)
 {
 	Node * traversalNode = header;
@@ -205,7 +255,11 @@ void * kc::List::pop(void)
 	delete traversalNode;
 	return data;
 }
-
+/// <summary>
+/// Gets data from the specified <see cref="index"/> of the list and destroys the node.
+/// </summary>
+/// <param name="index">Specified index</param>
+/// <returns>Data</returns>
 void * kc::List::pull_at(int index)
 {
 	Node * traversalNode = header;
@@ -227,7 +281,11 @@ void * kc::List::pull_at(int index)
 		return data;
 	}
 }
-
+/// <summary>
+/// Gets data of the specified <see cref="index"/> of the list and does not destroy the node.
+/// </summary>
+/// <param name="index">Specified index</param>
+/// <returns>Data</returns>
 void * kc::List::getIndex(int index)
 {
 	Node * traversalNode = header;
@@ -259,7 +317,9 @@ void kc::List::operator+=(void * data[])
 	append(i, data);
 }
 */
-
+/// <summary>
+/// Deletes nodes before deallocation.
+/// </summary>
 kc::List::~List(void)
 {
 	while (header)

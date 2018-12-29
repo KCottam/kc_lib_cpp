@@ -21,15 +21,15 @@ namespace kc
 		// Gets data variable
 		void * getData(void);
 		// Sets data variable
-		void setData(void * data);
+		Node setData(void * data);
 		// Gets next variable
 		Node * getNext(void);
 		// Sets next variable
-		void setNext(Node * node);
+		Node setNext(Node * node);
 		// Gets previous variable
 		Node * getPrevious(void);
 		// Sets previous variable
-		void setPrevious(Node * node);
+		Node setPrevious(Node * node);
 		// Currently does nothing
 		~Node(void);
 	};
