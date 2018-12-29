@@ -4,10 +4,10 @@ namespace kc
 {
 	namespace controller
 	{
-		//The flag variable becomes one of these when using get_key().
+		// The flag variable becomes one of these when using get_key().
 		typedef enum flagCodes
 		{
-			//Initialize all flags with this variable.
+			// Initialize all flags with this variable.
 			RETURN,
 			ESCAPE,
 			NUMPAD,
@@ -77,7 +77,7 @@ namespace kc
 			}
 			return string;
 		}
-		//Gets a key that the user presses and returns it. _getch() modified.
+		// Gets a key that the user presses and returns it. _getch() modified.
 		int get_key(int * flag, int delay);
 	}
 }

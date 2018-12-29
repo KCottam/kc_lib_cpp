@@ -17,11 +17,10 @@ void kc::core::resizeCursor(unsigned int visible)
 	info.bVisible = visible ? 1 : 0;
 	SetConsoleCursorInfo(kc_stdout, &info);
 }
-int main(int argc, char * argv[])
+void kc::core::SetupKCLib(void)
 {
 	kc_stdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	kc::core::kc_seed = (unsigned int)time(NULL);
 	srand(kc::core::kc_seed);
 	kc::core::enableConsoleColor();
-	return kc::core::kc_main(argc, argv);
 }

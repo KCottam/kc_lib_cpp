@@ -8,7 +8,7 @@ Other notes
 CHANGELOG
 /////////////////////////////////////////////////////////////////////////////
 ========================================================================
-	STATIC LIBRARY : kc_lib_cpp Project Overview (Version 1.0.1)
+	STATIC LIBRARY : kc_lib_cpp Project Overview (Version 1.0.2)
 ========================================================================
 
 kc_core.h, kc_core.cpp
@@ -20,10 +20,11 @@ kc_colors.h
 kc_controller.h, kc_controller.cpp
 	Contains controller functions and defines.
 
+kc_lists.h, kc_lists.cpp
+	Contains list classes and functions.
+
 TODO: kc_gui
 TODO: kc_gui_controls
-TODO: kc_lists
-TODO: kc_dlists
 TODO: kc_multithreading
 
 ========================================================================
@@ -42,13 +43,9 @@ kc::core::resizeCursor(unsigned int)
 	This is a function that changes the cursor size from 0% to 100%. Used in games 
 	where I do not allow a cursor.
 
-kc::core::kc_main(int,*char[])
-	This is the library wrapper's main function, the one that the user calls instead
-	of main().
-
-main(int,*char[])
-	This is the entry point of the program. It runs commands such as kc::core::enableConsoleColor()
-	and sets the value of kc::core::kc_seed. Runs kc::core::kc_main().
+kc::core::SetupKCLib(void)
+	This runs commands such as kc::core::enableConsoleColor()
+	and sets the value of kc::core::kc_seed.
 
 ========================================================================
 	MODULES: kc_colors Module Overview
@@ -80,7 +77,7 @@ kc::controller::FlagCodes
 kc::controller::KeyCodes
 	Has outputs for get_key().
 	
-kc::controller::get_key(*int,int)
+kc::controller::get_key(*int, int)
 	Gets a key that a user presses and returns it. Similar to _getch(), but modified.
 	The second parameter is a delay in ms. Use 0 for no delay.
 
@@ -90,12 +87,86 @@ kc::controller::toUpper(char), kc::controller::toUpper(char *)
 kc::controller::toLower(char), kc::controller::toLower(char *)
 	Lowercases a string or char.
 
+========================================================================
+	MODULES: kc_lists Module Overview
+========================================================================
+
+Has classes and functions for making linked lists of generic data.
+
+kc::Node
+	A class for each node of a linked lists.
+
+	Private:
+	kc::Node::data
+		Data of each node
+	kc::Node::next
+		The next node of the linked list. Is 0 if there is no next node.
+	kc::Node::previous
+		The previous node of the linked list. Is 0 if there is no previous node.
+
+	Public:
+	kc::Node::Node(void), kc::Node::Node(*void)
+		Initializes a node. If data is specified, then makes the node with that data.
+	kc::Node::getData(void)
+		Returns the data of a node.
+	kc::Node::setData(void*)
+		Sets the data of a node.
+	kc::Node::getNext(void)
+		Gets the next node of the linked list.
+	kc::Node::setNext(*kc::Node)
+		Sets the next node of the linked list. Have caution so memory isn't wasted!
+	kc::Node::getPrevious(void)
+		Gets the previous node of the linked list.
+	kc::Node::SetPrevious(*kc::Node)
+		Sets the previous node of the linked list. Have caution so memory isn't wasted!
+	kc::Node::~Node(void)
+		Does nothing.
+
+kc::List
+	A class for a linked list.
+
+	Private:
+	kc::List::header
+		The header node of a linked list.
+
+	Public:
+	kc::List::List(void), kc::List::List(*void), kc::List::List(int, *void[])
+		Initializes a linked list with any values given. int is for how many values are being initialized.
+	kc::List::getHeader(void)
+		Retrieves the header of the linked list.
+	kc::List::length(void)
+		Gets the length of the linked list.
+	kc::List::push(*void), kc::List::push(int,*void[])
+		Adds new data to the linked list at the beginning of it.
+	kc::List::append(*void), kc::List::append(int, *void[])
+		Adds new data to the linked list at the end of it.
+	kc::List::push_at(int, *void), kc::List::push_at(int, int, *void[])
+		Adds new data to the linked list at the index of the first parameter.
+	kc::List::pull(void)
+		Deletes the first node of the linked list and returns the data inside of it.
+	kc::List::pop(void)
+		Deletes the last node of the linked list and returns the data inside of it.
+	kc::List::pull_at(int)
+		Deletes the specified node of the linked list and returns the data inside of it.
+	kc::List::getIndex(int)
+		Gets the data of the node at the specified index without deleting the node.
+	kc::List:~List(void)
+		Deletes all nodes of the list before deallocating the memory of the list.
+
+TODO: kc::CircleList definitions and comments
+
 /////////////////////////////////////////////////////////////////////////////
 Other notes:
 
 I use "TODO:" comments to indicate parts of the source code I am planning to add to or customize.
 
 /////////////////////////////////////////////////////////////////////////////
+CHANGELOG 1.0.1
+	Made main() into just a setup function, kc::core::SetupKCLib
+	Added beginnings of Lists module.
+	Reformatted comments to have a space between the text and the double slashes, 
+		so I can differentiate between temporarily commented code and comments.
+
 CHANGELOG 1.0.1
 	Edited TO_UPPER and TO_LOWER to be in-line functions instead of constants. 
 		They check to see if a character is uppercase or lowercase before doing their function.
