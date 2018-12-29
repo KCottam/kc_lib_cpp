@@ -161,7 +161,7 @@ Other notes:
 I use "TODO:" comments to indicate parts of the source code I am planning to add to or customize.
 
 /////////////////////////////////////////////////////////////////////////////
-CHANGELOG 1.0.1
+CHANGELOG 1.0.2
 	Made main() into just a setup function, kc::core::SetupKCLib
 	Added beginnings of Lists module.
 	Reformatted comments to have a space between the text and the double slashes, 
