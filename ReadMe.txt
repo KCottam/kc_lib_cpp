@@ -9,7 +9,7 @@ Other notes
 CHANGELOG
 /////////////////////////////////////////////////////////////////////////////
 ========================================================================
-	STATIC LIBRARY : kc_lib_cpp Project Overview (Version 1.0.5)
+	STATIC LIBRARY : kc_lib_cpp Project Overview (Version 1.1.0)
 ========================================================================
 
 kc_core.h, kc_core.cpp
@@ -154,14 +154,16 @@ kc::List<T>
 	kc::List:~List(void)
 		Deletes all nodes of the list before deallocating the memory of the list.
 
-TODO: kc::CircleList definitions and comments
-
 /////////////////////////////////////////////////////////////////////////////
 Other notes:
 
 I use "TODO:" comments to indicate parts of the source code I am planning to add to or customize.
 
 /////////////////////////////////////////////////////////////////////////////
+CHANGELOG 1.1.0
+	Reformatted using ReSharper C++
+	TODO: UPDATE CHANGELOG, REMAKE kc_lists
+
 CHANGELOG 1.0.5
 	Reformatted kc_lists to use templates.
 	Also started using more references and const.

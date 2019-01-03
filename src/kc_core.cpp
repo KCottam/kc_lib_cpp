@@ -3,24 +3,24 @@
 #include <ctime>
 
 HANDLE kc_stdout;
-void kc::core::enableConsoleColor(void)
+void kc::core::enable_console_color(void)
 {
-	DWORD dwMode = 0;
-	GetConsoleMode(kc_stdout, &dwMode);
-	dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-	SetConsoleMode(kc_stdout, dwMode);
+	DWORD dw_mode = 0;
+	GetConsoleMode(kc_stdout, &dw_mode);
+	dw_mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+	SetConsoleMode(kc_stdout, dw_mode);
 }
-void kc::core::resizeCursor(unsigned int visible)
+void kc::core::resize_cursor(const unsigned int visible)
 {
 	CONSOLE_CURSOR_INFO info;
 	info.dwSize = visible ? visible : 10;
 	info.bVisible = visible ? 1 : 0;
 	SetConsoleCursorInfo(kc_stdout, &info);
 }
-void kc::core::SetupKCLib(void)
+void kc::core::setup_kc_lib(void)
 {
 	kc_stdout = GetStdHandle(STD_OUTPUT_HANDLE);
-	kc::core::kc_seed = (unsigned int)time(NULL);
+	kc::core::kc_seed = static_cast<unsigned int>(time(nullptr));
 	srand(kc::core::kc_seed);
-	kc::core::enableConsoleColor();
+	kc::core::enable_console_color();
 }

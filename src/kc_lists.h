@@ -3,56 +3,40 @@
 
 namespace kc
 {
-	// A node of a linked list 
-	template<typename T>
-	class Node
+	// A node of a linked list
+	template<typename T> class node final
 	{
-	private:
+	public:
 		// The data of the mode
 		T& data;
 		// The next node of the linked list
-		Node& next;
+		node* next;
 		// The previous node of the linked list
-		Node& previous;
-	public:
+		node* previous;
 		// Creates a node with no data
-		Node(void);
+		node(void);
 		// Creates a node with data
-		Node(const T& data);
-		// Gets data variable
-		T& getData(void);
-		// Sets data variable
-		Node& setData(const T& data);
-		// Gets next variable
-		Node& getNext(void);
-		// Sets next variable
-		Node& setNext(const Node& node);
-		// Gets previous variable
-		Node& getPrevious(void);
-		// Sets previous variable
-		Node& setPrevious(const Node& node);
-		// Currently does nothing
-		~Node(void);
+		explicit node(const T& data);
+		~node(void);
 	};
 
 	// A doubly-linked list.
-	template<typename T>
-	class List
+	template<typename T> class list final
 	{
 	private:
 		// The header node of a linked list
-		Node& header;
+		node<T>& header_;
 	public:
 		// Initializes a list with a blank header.
-		List(void);
+		list(void);
 		// Initializes a list with a single element.
-		List(const T& data);
+		explicit list(const T& data);
 		// Initializes a list with multiple elements.
-		List(const int length, const T data[]);
+		list(const int length, const T data[]);
 		// Gets header variable
-		Node& getHeader(void) const;
+		node<T>& get_header(void) const;
 		// Gets the length of the list
-		int length(void);
+		int length(void) const;
 		// Adds an element to the beginning of the list.
 		void push(const T& data);
 		// Adds elements to the beginning of the list.
@@ -72,10 +56,10 @@ namespace kc
 		// Gets the data of the node at the list's specified index. The node is destroyed.
 		T& pull_at(const int index);
 		// Gets the data of the node at the list's specified index. The node is NOT destroyed.
-		T& getIndex(const int index);
+		T& get_index(const int index);
 
-		// Deletes all of the nodes of the list before deallocating its memory.
-		~List(void);
+		// Deletes all of the nodes of the list before deallocation its memory.
+		~list(void);
 	};
 }
 

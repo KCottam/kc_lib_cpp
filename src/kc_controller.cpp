@@ -1,59 +1,59 @@
 #include <ctime>
 #include <conio.h>
 #include "kc_controller.h"
-int kc::controller::get_key(Flag& flag, time_t delay)
+int kc::controller::get_key(flag& flag, time_t delay)
 {
 	if (delay)
 	{
-		time_t currentTime = time(NULL);
-		while (time(NULL) <= currentTime + delay) {}
+		const auto current_time = time(nullptr);
+		while (time(nullptr) <= current_time + delay) {}
 	}
-	int key = _getch();
-	if (key == FlagReturn)
+	const auto key = _getch();
+	if (key == flag_return)
 	{
-		flag = FlagEscape;
+		flag = flag_escape;
 		return get_key(flag, 0);
 	}
-	if (key == FlagNumpad)
+	if (key == flag_numpad)
 	{
-		flag = FlagNumpad;
+		flag = flag_numpad;
 		return get_key(flag, 0);
 	}
-	else if (flag == FlagEscape || flag == FlagNumpad)
+	else if (flag == flag_escape || flag == flag_numpad)
 	{
 		switch (key)
 		{
 		case 'H':
-			return KeyUpArrow;
+			return key_up_arrow;
 		case 'P':
-			return KeyDownArrow;
+			return key_down_arrow;
 		case 'K':
-			return KeyLeftArrow;
+			return key_left_arrow;
 		case 'M':
-			return KeyRightArrow;
+			return key_right_arrow;
 		case 'G':
-			return KeyHome;
+			return key_home;
 		case 'I':
-			return KeyPgUp;
+			return key_pg_up;
 		case 'O':
-			return KeyEnd;
+			return key_end;
 		case 'Q':
-			return KeyPgDown;
+			return key_pg_down;
 		case 'R':
-			return KeyIns;
+			return key_ins;
 		case 'S':
-			return KeyDel;
+			return key_del;
 		default:
 			return key;
 		}
 	}
 	else if (key == '\r')
 	{
-		flag = FlagReturn;
+		flag = flag_return;
 	}
 	else
 	{
-		flag = FlagReturn;
+		flag = flag_return;
 	}
 	return key;
 }

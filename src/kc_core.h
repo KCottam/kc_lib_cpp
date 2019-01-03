@@ -12,11 +12,11 @@ namespace kc
 		// the seed in srand()
 		static unsigned int kc_seed;
 		// Sets the Console so that color and other escape codes are enabled.
-		void enableConsoleColor(void);
+		void enable_console_color(void);
 		// Sets visibility of the cursor. Visible has a range of 0-100, 0 = invisible, 100 = full block space.
-		void resizeCursor(unsigned int visible);
+		void resize_cursor(unsigned int visible);
 		// Runs various setup functions such as enableConsoleColor().
-		void SetupKCLib(void);
+		void setup_kc_lib(void);
 	}
 }
 

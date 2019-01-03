@@ -5,41 +5,41 @@ namespace kc
 	namespace controller
 	{
 		// The flag variable becomes one of these when using get_key().
-		enum Flag
+		enum flag
 		{
 			// Initialize all flags with this variable.
-			FlagReturn,
-			FlagEscape,
-			FlagNumpad,
-			FlagNormal
+			flag_return,
+			flag_escape,
+			flag_numpad,
+			flag_normal
 		};
-		enum Key
+		enum key
 		{
-			KeyUpArrow = -'U',
-			KeyDownArrow = -'D',
-			KeyLeftArrow = -'L',
-			KeyRightArrow = -'R',
-			KeyHome = -'H',
-			KeyEnd = -'E',
-			KeyPgUp = -('P' + 'U'),
-			KeyPgDown = -('P' + 'D'),
-			KeyIns = -'R',
-			KeyDel = -'S',
-			KeyReturn = '\r'
+			key_up_arrow = -'U',
+			key_down_arrow = -'D',
+			key_left_arrow = -'L',
+			key_right_arrow = -'R',
+			key_home = -'H',
+			key_end = -'E',
+			key_pg_up = -('P' + 'U'),
+			key_pg_down = -('P' + 'D'),
+			key_ins = -'R',
+			key_del = -'S',
+			key_return = '\r'
 		};
-		inline int ctrl(int key)
+		inline int ctrl(const int key)
 		{
 			return (key - 96);
 		}
-		inline int keyF(int key)
+		inline int key_f(const int key)
 		{
 			return (key + 58);
 		}
-		inline int ctrlkeyF(int key)
+		inline int ctrl_key_f(const int key)
 		{
 			return (key + 93);
 		}
-		inline char toUpper(char key)
+		inline char to_upper(const char key)
 		{
 			if (key > 'a' && key < 'z')
 			{
@@ -50,15 +50,15 @@ namespace kc
 				return key;
 			}
 		}
-		inline char * toUpper(char * string)
+		inline char * to_upper(char * string)
 		{
-			for (int i = 0; string[i] != '\0'; i++)
+			for (auto i = 0; string[i] != '\0'; i++)
 			{
-				toUpper(string[i]);
+				to_upper(string[i]);
 			}
 			return string;
 		}
-		inline char toLower(char key)
+		inline char to_lower(const char key)
 		{
 			if (key > 'A' && key < 'Z')
 			{
@@ -69,16 +69,16 @@ namespace kc
 				return key;
 			}
 		}
-		inline char * toLower(char * string)
+		inline char * to_lower(char * string)
 		{
-			for (int i = 0; string[i] != '\0'; i++)
+			for (auto i = 0; string[i] != '\0'; i++)
 			{
-				toLower(string[i]);
+				to_lower(string[i]);
 			}
 			return string;
 		}
 		// Gets a key that the user presses and returns it. _getch() modified.
-		int get_key(Flag& flag, time_t delay);
+		int get_key(flag& flag, time_t delay);
 	}
 }
 
