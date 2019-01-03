@@ -17,19 +17,19 @@ namespace kc
 		// Creates a node with no data
 		Node(void);
 		// Creates a node with data
-		Node(void * data);
+		Node(const void * data);
 		// Gets data variable
-		void * getData(void);
+		const void * getData(void);
 		// Sets data variable
-		Node setData(void * data);
+		Node setData(const void * data);
 		// Gets next variable
 		Node * getNext(void);
 		// Sets next variable
-		Node setNext(Node * node);
+		Node setNext(const Node * node);
 		// Gets previous variable
 		Node * getPrevious(void);
 		// Sets previous variable
-		Node setPrevious(Node * node);
+		Node setPrevious(const Node * node);
 		// Currently does nothing
 		~Node(void);
 	};
