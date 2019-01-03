@@ -1,36 +1,20 @@
 #include "kc_lists.h"
-/// <summary>
-/// Initializes a node of a linked list.
-/// </summary>
 template<typename T>
 kc::Node<T>::Node(void) : data{ 0 }, next{ 0 }, previous{ 0 }
 {
 }
 
-/// <summary>
-/// Initializes a node of a linked list with <see cref="data"/>,
-/// </summary>
-/// <param name="data">The to-be data of the node.</param>
 template<typename T>
 kc::Node<T>::Node(const T& data) : data{ data }, next{ 0 }, previous{ 0 }
 {
 }
 
-/// <summary>
-/// Gets the data of a node.
-/// </summary>
-/// <returns>The node's data</returns>
 template<typename T>
 T& kc::Node<T>::getData(void)
 {
 	return data;
 }
 
-/// <summary>
-/// Sets the data of a node to <see cref="data"/>.
-/// </summary>
-/// <param name="data">The node's to-be data.</param>
-/// <returns>Itself</returns>
 template<typename T>
 kc::Node<T>& kc::Node<T>::setData(const T& data)
 {
@@ -38,21 +22,12 @@ kc::Node<T>& kc::Node<T>::setData(const T& data)
 	return *this;
 }
 
-/// <summary>
-/// Gets the next node of the linked list.
-/// </summary>
-/// <returns>The node pointer of the next node in the linked list. 0 if there is none.</returns>
 template<typename T>
 kc::Node<T>& kc::Node<T>::getNext(void)
 {
 	return next;
 }
 
-/// <summary>
-/// Sets the next node of the linked list to <see cref="node"/>.
-/// </summary>
-/// <param name="node">The node to be set as the next node in the list.</param>
-/// <returns>Itself</returns>
 template<typename T>
 kc::Node<T>& kc::Node<T>::setNext(const Node& node)
 {
@@ -60,21 +35,12 @@ kc::Node<T>& kc::Node<T>::setNext(const Node& node)
 	return *this;
 }
 
-/// <summary>
-/// Gets the previous node of the linked list.
-/// </summary>
-/// <returns>The node to be set as the previous node in the list.</returns>
 template<typename T>
 kc::Node<T>& kc::Node<T>::getPrevious(void)
 {
 	return previous;
 }
 
-/// <summary>
-/// Sets the previous node of the linked list to <see cref="node"/>.
-/// </summary>
-/// <param name="node">The node to be set as the next node in the list.</param>
-/// <returns>Itself</returns>
 template<typename T>
 kc::Node<T>& kc::Node<T>::setPrevious(const Node& node)
 {
@@ -82,36 +48,21 @@ kc::Node<T>& kc::Node<T>::setPrevious(const Node& node)
 	return *this;
 }
 
-/// <summary>
-/// Nothing
-/// </summary>
 template<typename T>
 kc::Node<T>::~Node(void)
 {
 }
 
-/// <summary>
-/// Makes a new list with a header node.
-/// </summary>
 template<typename T>
 kc::List<T>::List(void) : header{ new kc::Node<T>() }
 {
 }
 
-/// <summary>
-/// Makes a new list with a header node that has data.
-/// </summary>
-/// <param name="data">The input data</param>
 template<typename T>
 kc::List<T>::List(const T& data) : header{ new kc::Node<T>(data) }
 {
 }
 
-/// <summary>
-/// Makes a new list with data.
-/// </summary>
-/// <param name="length">How many items are in <see cref="data"/>.</param>
-/// <param name="data">The data of a list.</param>
 template<typename T>
 kc::List<T>::List(const int length, const T data[]) : header{ new kc::Node<T>{data[0]} }
 {
@@ -123,20 +74,12 @@ kc::List<T>::List(const int length, const T data[]) : header{ new kc::Node<T>{da
 	}
 }
 
-/// <summary>
-/// Gets the header of the list.
-/// </summary>
-/// <returns>The header of the list.</returns>
 template<typename T>
 kc::Node<T>& kc::List<T>::getHeader(void) const
 {
 	return header;
 }
 
-/// <summary>
-/// Gets the length of the list.
-/// </summary>
-/// <returns>The length of the list.</returns>
 template<typename T>
 int kc::List<T>::length(void)
 {
@@ -154,10 +97,6 @@ int kc::List<T>::length(void)
 	return length;
 }
 
-/// <summary>
-/// Inserts data at the beginning of the list.
-/// </summary>
-/// <param name="data">Data</param>
 template<typename T>
 void kc::List<T>::push(const T& data)
 {
@@ -169,11 +108,6 @@ void kc::List<T>::push(const T& data)
 	}
 }
 
-/// <summary>
-/// Inserts data at the beginning of the list.
-/// </summary>
-/// <param name="length">How many items are in <see cref="data"/>.</param>
-/// <param name="data">Data</param>
 template<typename T>
 void kc::List<T>::push(const int length, const T data[])
 {
@@ -183,10 +117,6 @@ void kc::List<T>::push(const int length, const T data[])
 	}
 }
 
-/// <summary>
-/// Inserts data at the end of the list.
-/// </summary>
-/// <param name="data">Data</param>
 template<typename T>
 void kc::List<T>::append(const T& data)
 {
@@ -206,11 +136,6 @@ void kc::List<T>::append(const T& data)
 	beforeTraversalNode->setNext(newNode);
 }
 
-/// <summary>
-/// Inserts data at the end of the list.
-/// </summary>
-/// <param name="length">How many items are in <see cref="data"/>.</param>
-/// <param name="data">Data</param>
 template<typename T>
 void kc::List<T>::append(const int length, const T data[])
 {
@@ -220,11 +145,6 @@ void kc::List<T>::append(const int length, const T data[])
 	}
 }
 
-/// <summary>
-/// Inserts data at the specified <see cref="index"/> of the list.
-/// </summary>
-/// <param name="data">Data</param>
-/// <param name="index"></param>
 template<typename T>
 void kc::List<T>::push_at(int index, const T& data)
 {
@@ -247,12 +167,6 @@ void kc::List<T>::push_at(int index, const T& data)
 	}
 }
 
-/// <summary>
-/// Inserts data at the specified <see cref="index"/> of the list.
-/// </summary>
-/// <param name="index">Specified index of the list.</param>
-/// <param name="length">How many items are in <see cref="data"/>.</param>
-/// <param name="data">Data</param>
 template<typename T>
 void kc::List<T>::push_at(const int index, const int length, const T data[])
 {
@@ -262,10 +176,6 @@ void kc::List<T>::push_at(const int index, const int length, const T data[])
 	}
 }
 
-/// <summary>
-/// Gets data from the beginning of the list and destroys the node.
-/// </summary>
-/// <returns>Data</returns>
 template<typename T>
 T& kc::List<T>::pull(void)
 {
@@ -278,10 +188,6 @@ T& kc::List<T>::pull(void)
 	return data;
 }
 
-/// <summary>
-/// Gets data from the end of the list and destroys the node.
-/// </summary>
-/// <returns>Data</returns>
 template<typename T>
 T& kc::List<T>::pop(void)
 {
@@ -298,11 +204,6 @@ T& kc::List<T>::pop(void)
 	return data;
 }
 
-/// <summary>
-/// Gets data from the specified <see cref="index"/> of the list and destroys the node.
-/// </summary>
-/// <param name="index">Specified index</param>
-/// <returns>Data</returns>
 template<typename T>
 T& kc::List<T>::pull_at(int index)
 {
@@ -326,11 +227,6 @@ T& kc::List<T>::pull_at(int index)
 	}
 }
 
-/// <summary>
-/// Gets data of the specified <see cref="index"/> of the list and does not destroy the node.
-/// </summary>
-/// <param name="index">Specified index</param>
-/// <returns>Data</returns>
 template<typename T>
 T& kc::List<T>::getIndex(int index)
 {
@@ -351,9 +247,6 @@ T& kc::List<T>::getIndex(int index)
 	}
 }
 
-/// <summary>
-/// Deletes nodes before deallocation.
-/// </summary>
 template<typename T>
 kc::List<T>::~List(void)
 {
