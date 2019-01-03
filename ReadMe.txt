@@ -4,11 +4,12 @@ kc_lib_cpp Project Overview
 kc_core Module Overview
 kc_colors Module Overview
 kc_controller Module Overview
+kc_lists Module Overview
 Other notes
 CHANGELOG
 /////////////////////////////////////////////////////////////////////////////
 ========================================================================
-	STATIC LIBRARY : kc_lib_cpp Project Overview (Version 1.0.3)
+	STATIC LIBRARY : kc_lib_cpp Project Overview (Version 1.0.4)
 ========================================================================
 
 kc_core.h, kc_core.cpp
@@ -77,7 +78,7 @@ kc::controller::FlagCodes
 kc::controller::KeyCodes
 	Has outputs for get_key().
 	
-kc::controller::get_key(*int, int)
+kc::controller::get_key(Flag&, time_t)
 	Gets a key that a user presses and returns it. Similar to _getch(), but modified.
 	The second parameter is a delay in ms. Use 0 for no delay.
 
@@ -161,6 +162,12 @@ Other notes:
 I use "TODO:" comments to indicate parts of the source code I am planning to add to or customize.
 
 /////////////////////////////////////////////////////////////////////////////
+CHANGELOG 1.0.4
+	Reformatted kc::controller to use Flag enum for variable.
+	FlagCodes->Flag
+	KeyCodes->Key
+	Made kc::controller::get_key() use reference instead of pointer.
+
 CHANGELOG 1.0.3
 	Adds XML Documentation.
 

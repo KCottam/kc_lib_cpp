@@ -4,10 +4,10 @@
 /// <summary>
 /// Gets a key press from the user.
 /// </summary>
-/// <param name="flag">The "flag" variable that shows where the keypress came from.</param>
-/// <param name="delay">A delay between keypresses.</param>
+/// <param name="flag">The "flag" variable that shows where the key press came from.</param>
+/// <param name="delay">A delay between key presses.</param>
 /// <returns></returns>
-int kc::controller::get_key(int * flag, int delay)
+int kc::controller::get_key(Flag& flag, time_t delay)
 {
 	if (delay)
 	{
@@ -15,51 +15,51 @@ int kc::controller::get_key(int * flag, int delay)
 		while (time(NULL) <= currentTime + delay) {}
 	}
 	int key = _getch();
-	if (key == RETURN)
+	if (key == FlagReturn)
 	{
-		*flag = ESCAPE;
+		flag = FlagEscape;
 		return get_key(flag, 0);
 	}
-	if (key == NUMPAD)
+	if (key == FlagNumpad)
 	{
-		*flag = NUMPAD;
+		flag = FlagNumpad;
 		return get_key(flag, 0);
 	}
-	else if (*flag == ESCAPE || *flag == NUMPAD)
+	else if (flag == FlagEscape || flag == FlagNumpad)
 	{
 		switch (key)
 		{
 		case 'H':
-			return UP_ARROW;
+			return KeyUpArrow;
 		case 'P':
-			return DOWN_ARROW;
+			return KeyDownArrow;
 		case 'K':
-			return LEFT_ARROW;
+			return KeyLeftArrow;
 		case 'M':
-			return RIGHT_ARROW;
+			return KeyRightArrow;
 		case 'G':
-			return HOME;
+			return KeyHome;
 		case 'I':
-			return PG_UP;
+			return KeyPgUp;
 		case 'O':
-			return END;
+			return KeyEnd;
 		case 'Q':
-			return PG_DOWN;
+			return KeyPgDown;
 		case 'R':
-			return INS;
+			return KeyIns;
 		case 'S':
-			return DEL;
+			return KeyDel;
 		default:
 			return key;
 		}
 	}
 	else if (key == '\r')
 	{
-		*flag = RETURN;
+		flag = FlagReturn;
 	}
 	else
 	{
-		*flag = RETURN;
+		flag = FlagReturn;
 	}
 	return key;
 }
