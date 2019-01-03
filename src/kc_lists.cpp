@@ -1,11 +1,11 @@
 #include "kc_lists.h"
-template<typename T> kc::node<T>::node(void) : data{ nullptr }, next{ nullptr }, previous{ nullptr } {}
+template<typename T> kc::node<T>::node() : data{ nullptr }, next{ nullptr }, previous{ nullptr } {}
 
 template<typename T> kc::node<T>::node(const T& data) : data{ data }, next{ nullptr }, previous{ nullptr } {}
 
-template<typename T> kc::node<T>::~node(void) {}
+template<typename T> kc::node<T>::~node() {}
 
-template<typename T> kc::list<T>::list(void) : header_{ new kc::node<T>() } {}
+template<typename T> kc::list<T>::list() : header_{ new kc::node<T>() } {}
 
 template<typename T> kc::list<T>::list(const T& data) : header_{ new kc::node<T>(data) } {}
 
@@ -19,9 +19,9 @@ template<typename T> kc::list<T>::list(const int length, const T data[]) : heade
 	}
 }
 
-template<typename T> kc::node<T>& kc::list<T>::get_header(void) const { return header_; }
+template<typename T> kc::node<T>& kc::list<T>::get_header() const { return header_; }
 
-template<typename T> int kc::list<T>::length(void) const
+template<typename T> int kc::list<T>::length() const
 {
 	node<T>* traversal_node = header_;
 	if (!traversal_node)
@@ -110,7 +110,7 @@ template<typename T> void kc::list<T>::push_at(const int index, const int length
 	}
 }
 
-template<typename T> T& kc::list<T>::pull(void)
+template<typename T> T& kc::list<T>::pull()
 {
 	if (!header_)
 		return 0;
@@ -121,7 +121,7 @@ template<typename T> T& kc::list<T>::pull(void)
 	return data;
 }
 
-template<typename T> T& kc::list<T>::pop(void)
+template<typename T> T& kc::list<T>::pop()
 {
 	node<T>* traversal_node = header_;
 	node<T> before_traversal_node;
@@ -136,7 +136,7 @@ template<typename T> T& kc::list<T>::pop(void)
 	return data;
 }
 
-template<typename T> T& kc::list<T>::pull_at(int index)
+template<typename T> T& kc::list<T>::pull_at(const int index)
 {
 	node<T>* traversal_node = header_;
 	node<T>* before_traversal_node;
@@ -158,11 +158,11 @@ template<typename T> T& kc::list<T>::pull_at(int index)
 	}
 }
 
-template<typename T> T& kc::list<T>::get_index(int index)
+template<typename T> T& kc::list<T>::get_index(const int index)
 {
 	node<T>* traversal_node = header_;
 	node<T> before_traversal_node;
-	for (int i = 0; i < index && traversal_node; i++)
+	for (auto i = 0; i < index && traversal_node; i++)
 	{
 		before_traversal_node = traversal_node;
 		traversal_node = traversal_node->getNext();
@@ -177,7 +177,7 @@ template<typename T> T& kc::list<T>::get_index(int index)
 	}
 }
 
-template<typename T> kc::list<T>::~list(void)
+template<typename T> kc::list<T>::~list()
 {
 	while (header_)
 	{

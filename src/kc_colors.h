@@ -3,32 +3,35 @@
 namespace kc
 {
 	// Used for formatting in the console.
-	static class formatting
+	static class formatting final
 	{
+	public:
 		// Resets font styles and colors to default
-		const char * RESET = "\x1b[0m";
+		const char * reset = "\x1b[0m";
 		// Deletes the line the cursor is currently on
-		const char * DELETE_LINE = "\33[2K\r";
+		const char * delete_line = "\33[2K\r";
 		// Moves the cursor up one
-		const char * CURSOR_UP = "\33[1A";
+		const char * cursor_up = "\33[1A";
 		// Moves the cursor down one
-		const char * CURSOR_DOWN = "\33[1B";
+		const char * cursor_down = "\33[1B";
 		// Moves the cursor right one
-		const char * CURSOR_RIGHT = "\33[1C";
+		const char * cursor_right = "\33[1C";
 		// Moves the cursor left one
-		const char * CURSOR_LEFT = "\33[1D";
-	} Formatting;
-	static class styles
+		const char * cursor_left = "\33[1D";
+	} formatting;
+	static class styles final
 	{
+	public:
 		// Applies a bold font style to the text after it
-		const char * BOLD = "\x1b[1m";
+		const char * bold = "\x1b[1m";
 		// Applies an underlined font style to the text after it
-		const char * UNDERLINE = "\x1b[4m";
+		const char * underline = "\x1b[4m";
 		// Swaps the color of the foreground and background colors of the text after it
-		const char * INVERSE = "\x1b[7m";
-	} Styles;
-	static class colors
+		const char * inverse = "\x1b[7m";
+	} styles;
+	static class colors final
 	{
+	public:
 		// dark black
 		// Default terminal background color
 		const char * black = "\x1b[30m";
@@ -63,9 +66,10 @@ namespace kc
 		const char * CYAN = "\x1b[96m";
 		// bright or strong white
 		const char * WHITE = "\x1b[97m";
-	} Colors;
-	static class highlights
+	} colors;
+	static class highlights final
 	{
+	public:
 		// dark black highlight.
 		// default terminal background color
 		const char * black = "\x1b[40m";
@@ -100,11 +104,11 @@ namespace kc
 		const char * CYAN = "\x1b[106m";
 		// bright or strong white highlight
 		const char * WHITE = "\x1b[107m";
-	} Highlights;
+	} highlights;
 }
 
 // Usage:	Colorize(color, <insert all code that needs to be colorized>(;
 //			Colorize(kc::colors::RED, draw_box(....));
-#define Colorize(color, code) {cout << color; code; cout << RESET;}
+#define COLORIZE(color, code) {cout << (color); {code}; cout << (RESET);}
 
 #endif // !KC_COLORS_H_

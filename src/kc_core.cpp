@@ -3,7 +3,7 @@
 #include <ctime>
 
 HANDLE kc_stdout;
-void kc::core::enable_console_color(void)
+void kc::core::enable_console_color()
 {
 	DWORD dw_mode = 0;
 	GetConsoleMode(kc_stdout, &dw_mode);
@@ -17,7 +17,7 @@ void kc::core::resize_cursor(const unsigned int visible)
 	info.bVisible = visible ? 1 : 0;
 	SetConsoleCursorInfo(kc_stdout, &info);
 }
-void kc::core::setup_kc_lib(void)
+void kc::core::setup_kc_lib()
 {
 	kc_stdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	kc::core::kc_seed = static_cast<unsigned int>(time(nullptr));
