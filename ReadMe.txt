@@ -9,7 +9,7 @@ Other notes
 CHANGELOG
 /////////////////////////////////////////////////////////////////////////////
 ========================================================================
-	STATIC LIBRARY : kc_lib_cpp Project Overview (Version 1.0.4)
+	STATIC LIBRARY : kc_lib_cpp Project Overview (Version 1.0.%
 ========================================================================
 
 kc_core.h, kc_core.cpp
@@ -94,36 +94,36 @@ kc::controller::toLower(char), kc::controller::toLower(char *)
 
 Has classes and functions for making linked lists of generic data.
 
-kc::Node
+kc::Node<T>
 	A class for each node of a linked lists.
 
 	Private:
-	kc::Node::data
+	kc::Node<T>::data
 		Data of each node
-	kc::Node::next
+	kc::Node<T>::next
 		The next node of the linked list. Is 0 if there is no next node.
-	kc::Node::previous
+	kc::Node<T>::previous
 		The previous node of the linked list. Is 0 if there is no previous node.
 
 	Public:
-	kc::Node::Node(void), kc::Node::Node(*void)
+	kc::Node::Node(void), kc::Node::Node(const T&)
 		Initializes a node. If data is specified, then makes the node with that data.
 	kc::Node::getData(void)
 		Returns the data of a node.
-	kc::Node::setData(void*)
+	kc::Node::setData(const T&)
 		Sets the data of a node.
 	kc::Node::getNext(void)
 		Gets the next node of the linked list.
-	kc::Node::setNext(*kc::Node)
+	kc::Node::setNext(kc::Node&)
 		Sets the next node of the linked list. Have caution so memory isn't wasted!
 	kc::Node::getPrevious(void)
 		Gets the previous node of the linked list.
-	kc::Node::SetPrevious(*kc::Node)
+	kc::Node::SetPrevious(kc::Node&)
 		Sets the previous node of the linked list. Have caution so memory isn't wasted!
 	kc::Node::~Node(void)
 		Does nothing.
 
-kc::List
+kc::List<T>
 	A class for a linked list.
 
 	Private:
@@ -131,25 +131,25 @@ kc::List
 		The header node of a linked list.
 
 	Public:
-	kc::List::List(void), kc::List::List(*void), kc::List::List(int, *void[])
+	kc::List::List(void), kc::List::List(const T&), kc::List::List(int, const T[])
 		Initializes a linked list with any values given. int is for how many values are being initialized.
 	kc::List::getHeader(void)
 		Retrieves the header of the linked list.
 	kc::List::length(void)
 		Gets the length of the linked list.
-	kc::List::push(*void), kc::List::push(int,*void[])
+	kc::List::push(const T&), kc::List::push(const int, const T[])
 		Adds new data to the linked list at the beginning of it.
-	kc::List::append(*void), kc::List::append(int, *void[])
+	kc::List::append(const T&), kc::List::append(const int, const T[])
 		Adds new data to the linked list at the end of it.
-	kc::List::push_at(int, *void), kc::List::push_at(int, int, *void[])
+	kc::List::push_at(const int, const T&), kc::List::push_at(const int, const int, const T[])
 		Adds new data to the linked list at the index of the first parameter.
 	kc::List::pull(void)
 		Deletes the first node of the linked list and returns the data inside of it.
 	kc::List::pop(void)
 		Deletes the last node of the linked list and returns the data inside of it.
-	kc::List::pull_at(int)
+	kc::List::pull_at(const int)
 		Deletes the specified node of the linked list and returns the data inside of it.
-	kc::List::getIndex(int)
+	kc::List::getIndex(const int)
 		Gets the data of the node at the specified index without deleting the node.
 	kc::List:~List(void)
 		Deletes all nodes of the list before deallocating the memory of the list.
@@ -162,6 +162,10 @@ Other notes:
 I use "TODO:" comments to indicate parts of the source code I am planning to add to or customize.
 
 /////////////////////////////////////////////////////////////////////////////
+CHANGELOG 1.0.5
+	Reformatted kc_lists to use templates.
+	Also started using more references and const.
+
 CHANGELOG 1.0.4
 	Reformatted kc::controller to use Flag enum for variable.
 	FlagCodes->Flag

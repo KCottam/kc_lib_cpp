@@ -4,105 +4,78 @@
 namespace kc
 {
 	// A node of a linked list 
+	template<typename T>
 	class Node
 	{
 	private:
 		// The data of the mode
-		void * data;
+		T& data;
 		// The next node of the linked list
-		Node * next;
+		Node& next;
 		// The previous node of the linked list
-		Node * previous;
+		Node& previous;
 	public:
 		// Creates a node with no data
 		Node(void);
 		// Creates a node with data
-		Node(const void * data);
+		Node(const T& data);
 		// Gets data variable
-		const void * getData(void);
+		T& getData(void);
 		// Sets data variable
-		Node setData(const void * data);
+		Node& setData(const T& data);
 		// Gets next variable
-		Node * getNext(void);
+		Node& getNext(void);
 		// Sets next variable
-		Node setNext(const Node * node);
+		Node& setNext(const Node& node);
 		// Gets previous variable
-		Node * getPrevious(void);
+		Node& getPrevious(void);
 		// Sets previous variable
-		Node setPrevious(const Node * node);
+		Node& setPrevious(const Node& node);
 		// Currently does nothing
 		~Node(void);
 	};
 
 	// A doubly-linked list.
+	template<typename T>
 	class List
 	{
 	private:
 		// The header node of a linked list
-		Node * header;
+		Node& header;
 	public:
 		// Initializes a list with a blank header.
 		List(void);
 		// Initializes a list with a single element.
-		List(void * data);
+		List(const T& data);
 		// Initializes a list with multiple elements.
-		List(int length, void * data[]);
+		List(const int length, const T data[]);
 		// Gets header variable
-		Node * getHeader(void);
+		Node& getHeader(void) const;
 		// Gets the length of the list
 		int length(void);
 		// Adds an element to the beginning of the list.
-		void push(void * data);
+		void push(const T& data);
 		// Adds elements to the beginning of the list.
-		void push(int length, void * data[]);
+		void push(const int length, const T data[]);
 		// Adds an element to the end of the list.
-		void append(void * data);
+		void append(const T& data);
 		// Adds elements to the end of the list.
-		void append(int length, void * data[]);
+		void append(const int length, const T data[]);
 		// Adds an element to the list at the index.
-		void push_at(int index, void * data);
+		void push_at(const int index, const T& data);
 		// Adds elements to the list at the index.
-		void push_at(int index, int length, void * data[]);
+		void push_at(const int index, const int length, const T data[]);
 		// Gets the data of the list's first node. The node is destroyed.
-		void * pull(void);
+		T& pull(void);
 		// Gets the data of the list's last node. The node is destroyed.
-		void * pop(void);
+		T& pop(void);
 		// Gets the data of the node at the list's specified index. The node is destroyed.
-		void * pull_at(int index);
+		T& pull_at(const int index);
 		// Gets the data of the node at the list's specified index. The node is NOT destroyed.
-		void * getIndex(int index);
-		// I don't know how to do this yet so I am commenting it out.
-		// I also want a bracket accessor. List[x] is getIndex(x). void operator [] (int index)?
-		//void operator += (void * data);
-		//void operator += (void * data[]);
-		//List operator + (List list);
-		//List operator + (void * data);
-		//List operator + (void * data[]);
-		//void operator -= (int index);
-		//void operator - (int index);
+		T& getIndex(const int index);
 
 		// Deletes all of the nodes of the list before deallocating its memory.
 		~List(void);
-	};
-
-	//TODO: CircleList
-	class CircleList
-	{
-	private:
-		Node * header;
-	public:
-		CircleList(void);
-		CircleList(List list);
-		CircleList(void * data);
-		CircleList(int length, void * data[]);
-		void push(void * data);
-		void pull(void * data);
-		void transverse(int number);
-		void operator = (List list);
-		void operator += (void * data);
-		void operator += (void * data[]);
-		void operator -= (int index);
-		~CircleList(void);
 	};
 }
 
