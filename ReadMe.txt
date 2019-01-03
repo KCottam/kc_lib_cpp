@@ -72,10 +72,10 @@ kc::styles::
 
 Has functions for getting user input.
 
-kc::controller::FlagCodes
+kc::controller::Flag
 	The inputted flag variable becomes one of these when using get_key().
 
-kc::controller::KeyCodes
+kc::controller::Key
 	Has outputs for get_key().
 	
 kc::controller::get_key(Flag&, time_t)
