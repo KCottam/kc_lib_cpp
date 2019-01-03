@@ -9,7 +9,7 @@ Other notes
 CHANGELOG
 /////////////////////////////////////////////////////////////////////////////
 ========================================================================
-	STATIC LIBRARY : kc_lib_cpp Project Overview (Version 1.0.4)
+	STATIC LIBRARY : kc_lib_cpp Project Overview (Version 1.0.5)
 ========================================================================
 
 kc_core.h, kc_core.cpp
