@@ -5,28 +5,28 @@ namespace kc
 	namespace controller
 	{
 		// The flag variable becomes one of these when using get_key().
-		typedef enum flagCodes
+		enum Flag
 		{
 			// Initialize all flags with this variable.
-			RETURN,
-			ESCAPE,
-			NUMPAD,
-			NORMAL
-		} FlagCodes;
-		typedef enum keyCodes
+			FlagReturn,
+			FlagEscape,
+			FlagNumpad,
+			FlagNormal
+		};
+		enum Key
 		{
-			UP_ARROW = -'U',
-			DOWN_ARROW = -'D',
-			LEFT_ARROW = -'L',
-			RIGHT_ARROW = -'R',
-			HOME = -'H',
-			PG_UP = -('P' + 'U'),
-			END = -'E',
-			PG_DOWN = -('P' + 'D'),
-			INS = -'R',
-			DEL = -'S',
-			ENTER = '\r'
-		} KeyCodes;
+			KeyUpArrow = -'U',
+			KeyDownArrow = -'D',
+			KeyLeftArrow = -'L',
+			KeyRightArrow = -'R',
+			KeyHome = -'H',
+			KeyEnd = -'E',
+			KeyPgUp = -('P' + 'U'),
+			KeyPgDown = -('P' + 'D'),
+			KeyIns = -'R',
+			KeyDel = -'S',
+			KeyReturn = '\r'
+		};
 		inline int ctrl(int key)
 		{
 			return (key - 96);
@@ -78,7 +78,7 @@ namespace kc
 			return string;
 		}
 		// Gets a key that the user presses and returns it. _getch() modified.
-		int get_key(int * flag, int delay);
+		int get_key(Flag& flag, time_t delay);
 	}
 }
 
