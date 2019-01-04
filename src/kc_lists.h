@@ -11,8 +11,10 @@ namespace KC
 		ListNode* Next;
 		ListNode* Previous;
 		explicit ListNode(const T& data);
-		// TODO: Add operator functions
-		// How to implement operator functions?
+		// TODO: Add operator functions such as (T)=
+		// const T operator=(const ListNode& node) takes data from node and puts it to T.
+		// TODO: Add copy constructor
+		// TODO: How to implement copy constructor?
 	};
 
 	template <typename T>
@@ -25,23 +27,31 @@ namespace KC
 		LinkedList(int length, const T data[]);
 		ListNode<T>& GetHeader() const;
 		int Length() const;
-		void Push(const T& data);
+		void Push(const T& data); // operator<<()
 		void Push(int length, const T data[]);
 		void Append(const T& data);
 		void Append(int length, const T data[]);
 		void PushAt(int index, const T& data);
 		void PushAt(int index, int length, const T data[]);
-		T Pull();
+		T Pull(); // operator>>()
 		T Pop();
 		T PullAt(int index);
 		T& GetIndex(int index) const;
 		~LinkedList();
-		// TODO: Add operator functions
+		// TODO: Add operator functions such as <<, (ListNode)=, >>
+		// TODO: Add copy constructor
 	};
 
 	// TODO: Add CircleList class and related functions
-
 	// TODO: Add std::cout overrides
 }
+#ifdef _IOSTREAM_
+#include <iostream>
+template<typename T>
+std::ostream& operator<<(std::ostream& stream, const KC::ListNode<T>& node);
+
+template<typename T>
+std::ostream& operator<<(std::ostream& stream, const KC::LinkedList<T>& list);
+#endif // !_IOSTREAM_
 
 #endif // !KC_LISTS_H_

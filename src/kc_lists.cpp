@@ -1,22 +1,22 @@
 #include "kc_lists.h"
 
 template <typename T>
-KC::ListNode<T>::ListNode(const T& data) : Data{data}
+KC::ListNode<T>::ListNode(const T& data) : Data{ data }
 {
 }
 
 template <typename T>
-KC::LinkedList<T>::LinkedList() : Header{new ListNode<T>()}
+KC::LinkedList<T>::LinkedList() : Header{ new ListNode<T>() }
 {
 }
 
 template <typename T>
-KC::LinkedList<T>::LinkedList(const T& data) : Header{new ListNode<T>(data)}
+KC::LinkedList<T>::LinkedList(const T& data) : Header{ new ListNode<T>(data) }
 {
 }
 
 template <typename T>
-KC::LinkedList<T>::LinkedList(const int length, const T data[]) : Header{new ListNode<T>{data[0]}}
+KC::LinkedList<T>::LinkedList(const int length, const T data[]) : Header{ new ListNode<T>{data[0]} }
 {
 	ListNode<T>* traversalNode = Header;
 	for (auto i = 1; i < length; i++)
@@ -198,3 +198,25 @@ KC::LinkedList<T>::~LinkedList()
 		Pull();
 	}
 }
+#ifdef _IOSTREAM_
+#include <iostream>
+template<typename T>
+std::ostream& operator<<(std::ostream& stream, const KC::ListNode<T>& node)
+{
+	std::cout << node.Data;
+	return stream;
+}
+
+template<typename T>
+std::ostream& operator<<(std::ostream& stream, const KC::LinkedList<T>& list)
+{
+	auto length = list.Length();
+	for (auto i = 0; i < length; i++)
+	{
+		std::cout << list.GetIndex(i);
+	}
+	return stream;
+}
+#endif
+
+
