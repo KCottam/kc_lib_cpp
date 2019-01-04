@@ -1,7 +1,7 @@
 #include "kc_lists.h"
 
 template <typename T>
-KC::ListNode<T>::ListNode(const T& data) : Data{data}, Next{nullptr}, Previous{nullptr}
+KC::ListNode<T>::ListNode(const T& data) : Data{data}
 {
 }
 
