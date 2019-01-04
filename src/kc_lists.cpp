@@ -1,186 +1,200 @@
 #include "kc_lists.h"
-template<typename T> kc::node<T>::node() : data{ nullptr }, next{ nullptr }, previous{ nullptr } {}
 
-template<typename T> kc::node<T>::node(const T& data) : data{ data }, next{ nullptr }, previous{ nullptr } {}
-
-template<typename T> kc::node<T>::~node() {}
-
-template<typename T> kc::list<T>::list() : header_{ new kc::node<T>() } {}
-
-template<typename T> kc::list<T>::list(const T& data) : header_{ new kc::node<T>(data) } {}
-
-template<typename T> kc::list<T>::list(const int length, const T data[]) : header_{ new kc::node<T>{data[0]} }
+template <typename T>
+KC::ListNode<T>::ListNode(const T& data) : Data{data}, Next{nullptr}, Previous{nullptr}
 {
-	node<T>* traversal_node = header_;
+}
+
+template <typename T>
+KC::LinkedList<T>::LinkedList() : Header{new ListNode<T>()}
+{
+}
+
+template <typename T>
+KC::LinkedList<T>::LinkedList(const T& data) : Header{new ListNode<T>(data)}
+{
+}
+
+template <typename T>
+KC::LinkedList<T>::LinkedList(const int length, const T data[]) : Header{new ListNode<T>{data[0]}}
+{
+	ListNode<T>* traversalNode = Header;
 	for (auto i = 1; i < length; i++)
 	{
-		traversal_node->setNext(new node<T>(data[i]));
-		traversal_node = traversal_node->getNext();
+		traversalNode->setNext(new ListNode<T>(data[i]));
+		traversalNode = traversalNode->getNext();
 	}
 }
 
-template<typename T> kc::node<T>& kc::list<T>::get_header() const { return header_; }
+template <typename T>
+KC::ListNode<T>& KC::LinkedList<T>::GetHeader() const { return Header; }
 
-template<typename T> int kc::list<T>::length() const
+template <typename T>
+int KC::LinkedList<T>::Length() const
 {
-	node<T>* traversal_node = header_;
-	if (!traversal_node)
+	ListNode<T>* traversalNode = Header;
+	if (!traversalNode)
 	{
 		return 0;
 	}
-	traversal_node = traversal_node->getNext();
-	int length = 1;
-	for (; traversal_node != header_; length++)
+	traversalNode = traversalNode->getNext();
+	auto length = 1;
+	for (; traversalNode != Header; length++)
 	{
-		traversal_node = traversal_node->getNext();
+		traversalNode = traversalNode->getNext();
 	}
 	return length;
 }
 
-template<typename T> void kc::list<T>::push(const T& data)
+template <typename T>
+void KC::LinkedList<T>::Push(const T& data)
 {
-	node<T>* previous_header = header_;
-	header_ = new node<T>(data);
-	if (previous_header)
+	ListNode<T>* previousHeader = Header;
+	Header = new ListNode<T>(data);
+	if (previousHeader)
 	{
-		header_->setNext(previous_header);
+		Header->setNext(previousHeader);
 	}
 }
 
-template<typename T> void kc::list<T>::push(const int length, const T data[])
+template <typename T>
+void KC::LinkedList<T>::Push(const int length, const T data[])
 {
 	for (auto i = 0; i < length; i++)
 	{
-		push_at(i, data);
+		PushAt(i, data);
 	}
 }
 
-template<typename T> void kc::list<T>::append(const T& data)
+template <typename T>
+void KC::LinkedList<T>::Append(const T& data)
 {
-	if (!header_)
+	if (!Header)
 	{
-		push(data);
+		Push(data);
 	}
-	node<T>* traversal_node = header_;
-	node<T>* before_traversal_node;
-	while (traversal_node)
+	ListNode<T>* traversalNode = Header;
+	ListNode<T>* beforeTraversalNode;
+	while (traversalNode)
 	{
-		before_traversal_node = traversal_node;
-		traversal_node = traversal_node->getNext();
+		beforeTraversalNode = traversalNode;
+		traversalNode = traversalNode->getNext();
 	}
-	node<T>* new_node = new node<T>(data);
-	new_node->setPrevious(before_traversal_node);
-	before_traversal_node->setNext(new_node);
+	ListNode<T>* newNode = new ListNode<T>(data);
+	newNode->setPrevious(beforeTraversalNode);
+	beforeTraversalNode->setNext(newNode);
 }
 
-template<typename T> void kc::list<T>::append(const int length, const T data[])
+template <typename T>
+void KC::LinkedList<T>::Append(const int length, const T data[])
 {
 	for (auto i = 0; i < length; i++)
 	{
-		append(data);
+		Append(data);
 	}
 }
 
-template<typename T> void kc::list<T>::push_at(const int index, const T& data)
+template <typename T>
+void KC::LinkedList<T>::PushAt(const int index, const T& data)
 {
-	node<T>* traversal_node = header_;
-	for (auto i = 0; i < index && traversal_node; i++)
+	ListNode<T>* traversalNode = Header;
+	for (auto i = 0; i < index && traversalNode; i++)
 	{
-		traversal_node = traversal_node->getNext();
+		traversalNode = traversalNode->getNext();
 	}
-	if (!traversal_node)
+	if (!traversalNode)
 	{
-		push(data);
+		Push(data);
 	}
 	else
 	{
-		node<T> * new_node = new node<T>(data);
-		new_node->setPrevious(traversal_node);
-		new_node->setNext(traversal_node->getNext());
-		new_node->getNext()->setPrevious(new_node);
-		traversal_node->setNext(new_node);
+		ListNode<T>* newNode = new ListNode<T>(data);
+		newNode->setPrevious(traversalNode);
+		newNode->setNext(traversalNode->getNext());
+		newNode->getNext()->setPrevious(newNode);
+		traversalNode->setNext(newNode);
 	}
 }
 
-template<typename T> void kc::list<T>::push_at(const int index, const int length, const T data[])
+template <typename T>
+void KC::LinkedList<T>::PushAt(const int index, const int length, const T data[])
 {
 	for (auto i = 0; i < length; i++)
 	{
-		push_at(index + i, data[i]);
+		PushAt(index + i, data[i]);
 	}
 }
 
-template<typename T> T& kc::list<T>::pull()
+template <typename T>
+T KC::LinkedList<T>::Pull()
 {
-	if (!header_)
+	if (!Header)
 		return 0;
-	void * data = header_->getData();
-	node<T> * old_header = header_;
-	header_ = header_->getNext();
-	delete old_header;
+	T data = Header->getData();
+	ListNode<T>* oldHeader = Header;
+	Header = Header->getNext();
+	delete oldHeader;
 	return data;
 }
 
-template<typename T> T& kc::list<T>::pop()
+template <typename T>
+T KC::LinkedList<T>::Pop()
 {
-	node<T>* traversal_node = header_;
-	node<T> before_traversal_node;
-	while (traversal_node)
+	ListNode<T>* traversalNode = Header;
+	ListNode<T> beforeTraversalNode;
+	while (traversalNode)
 	{
-		before_traversal_node = traversal_node;
-		traversal_node = traversal_node->getNext();
+		beforeTraversalNode = traversalNode;
+		traversalNode = traversalNode->getNext();
 	}
-	before_traversal_node->setNext(0);
-	T& data = traversal_node->getData();
-	delete traversal_node;
+	beforeTraversalNode->setNext(nullptr);
+	T data = traversalNode->getData();
+	delete traversalNode;
 	return data;
 }
 
-template<typename T> T& kc::list<T>::pull_at(const int index)
+template <typename T>
+T KC::LinkedList<T>::PullAt(const int index)
 {
-	node<T>* traversal_node = header_;
-	node<T>* before_traversal_node;
-	for (auto i = 0; i < index && traversal_node; i++)
+	ListNode<T>* traversalNode = Header;
+	ListNode<T>* beforeTraversalNode;
+	for (auto i = 0; i < index && traversalNode; i++)
 	{
-		before_traversal_node = traversal_node;
-		traversal_node = traversal_node->getNext();
+		beforeTraversalNode = traversalNode;
+		traversalNode = traversalNode->getNext();
 	}
-	if (!traversal_node)
+	if (!traversalNode)
 	{
-		return pop();
+		return Pop();
 	}
-	else
-	{
-		T& data = traversal_node->getData();
-		before_traversal_node->setNext(0);
-		delete traversal_node;
-		return data;
-	}
+	T data = traversalNode->getData();
+	beforeTraversalNode->setNext(nullptr);
+	delete traversalNode;
+	return data;
 }
 
-template<typename T> T& kc::list<T>::get_index(const int index)
+template <typename T>
+T& KC::LinkedList<T>::GetIndex(const int index) const
 {
-	node<T>* traversal_node = header_;
-	node<T> before_traversal_node;
-	for (auto i = 0; i < index && traversal_node; i++)
+	ListNode<T>* traversalNode = Header;
+	ListNode<T> beforeTraversalNode;
+	for (auto i = 0; i < index && traversalNode; i++)
 	{
-		before_traversal_node = traversal_node;
-		traversal_node = traversal_node->getNext();
+		beforeTraversalNode = traversalNode;
+		traversalNode = traversalNode->getNext();
 	}
-	if (!traversal_node)
+	if (!traversalNode)
 	{
-		return before_traversal_node->getData();
+		return beforeTraversalNode->getData();
 	}
-	else
-	{
-		return traversal_node->getData();
-	}
+	return traversalNode->getData();
 }
 
-template<typename T> kc::list<T>::~list()
+template <typename T>
+KC::LinkedList<T>::~LinkedList()
 {
-	while (header_)
+	while (Header)
 	{
-		pull();
+		Pull();
 	}
 }

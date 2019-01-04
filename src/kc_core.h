@@ -5,18 +5,14 @@
 #define ENABLE_VIRTUAL_TERMINAL_PROCESSING 0x0004
 #endif // !ENABLE_VIRTUAL_TERMINAL_PROCESSING
 
-namespace kc
+namespace KC
 {
-	namespace core
+	namespace Core
 	{
-		// the seed in srand()
-		static unsigned int kc_seed;
-		// Sets the Console so that color and other escape codes are enabled.
-		void enable_console_color();
-		// Sets visibility of the cursor. Visible has a range of 0-100, 0 = invisible, 100 = full block space.
-		void resize_cursor(unsigned int visible);
-		// Runs various setup functions such as enableConsoleColor().
-		void setup_kc_lib();
+		static unsigned int randomizationSeed;
+		void EnableConsoleColor();
+		void ResizeCursor(unsigned int visible);
+		void SetupKCLib();
 	}
 }
 

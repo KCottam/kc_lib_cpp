@@ -1,59 +1,91 @@
 #include <ctime>
 #include <conio.h>
 #include "kc_controller.h"
-int kc::controller::get_key(flag& flag, time_t delay)
+
+char KC::Controller::ToUpper(const char key)
+{
+	if (key > 'a' && key < 'z')
+	{
+		return key + ('A' - 'a');
+	}
+	return key;
+}
+
+char* KC::Controller::ToUpper(char* string)
+{
+	for (auto i = 0; string[i] != '\0'; i++)
+	{
+		ToUpper(string[i]);
+	}
+	return string;
+}
+
+char KC::Controller::ToLower(const char key)
+{
+	if (key > 'A' && key < 'Z')
+	{
+		return key + ('a' - 'A');
+	}
+	return key;
+}
+
+char* KC::Controller::ToLower(char* string)
+{
+	for (auto i = 0; string[i] != '\0'; i++)
+	{
+		ToLower(string[i]);
+	}
+	return string;
+}
+
+int KC::Controller::GetKey(InputFlag& flag, const time_t delay)
 {
 	if (delay)
 	{
-		const auto current_time = time(nullptr);
-		while (time(nullptr) <= current_time + delay) {}
+		const auto currentTime = time(nullptr);
+		while (time(nullptr) <= currentTime + delay)
+		{
+		}
 	}
 	const auto key = _getch();
-	if (key == flag_return)
+	if (key == FlagReturn)
 	{
-		flag = flag_escape;
-		return get_key(flag, 0);
+		flag = FlagEscape;
+		return GetKey(flag, 0);
 	}
-	if (key == flag_numpad)
+	if (key == FlagNumpad)
 	{
-		flag = flag_numpad;
-		return get_key(flag, 0);
+		flag = FlagNumpad;
+		return GetKey(flag, 0);
 	}
-	else if (flag == flag_escape || flag == flag_numpad)
+	if (flag == FlagEscape || flag == FlagNumpad)
 	{
 		switch (key)
 		{
 		case 'H':
-			return key_up_arrow;
+			return KeyUpArrow;
 		case 'P':
-			return key_down_arrow;
+			return KeyDownArrow;
 		case 'K':
-			return key_left_arrow;
+			return KeyLeftArrow;
 		case 'M':
-			return key_right_arrow;
+			return KeyRightArrow;
 		case 'G':
-			return key_home;
+			return KeyHome;
 		case 'I':
-			return key_pg_up;
+			return KeyPgUp;
 		case 'O':
-			return key_end;
+			return KeyEnd;
 		case 'Q':
-			return key_pg_down;
+			return KeyPgDown;
 		case 'R':
-			return key_ins;
+			return KeyIns;
 		case 'S':
-			return key_del;
+			return KeyDel;
 		default:
 			return key;
 		}
 	}
-	else if (key == '\r')
-	{
-		flag = flag_return;
-	}
-	else
-	{
-		flag = flag_return;
-	}
+	flag = FlagReturn;
 	return key;
 }
