@@ -10,7 +10,7 @@ ListNode<T>::ListNode() : Data(nullptr), Next(nullptr), Previous(nullptr)
 }
 
 template <typename T>
-ListNode<T>::ListNode(T& data) : Data{ data }, Next(nullptr), Previous(nullptr)
+ListNode<T>::ListNode(T& data) : Data{data}, Next(nullptr), Previous(nullptr)
 {
 }
 
@@ -18,17 +18,17 @@ template <typename T>
 ListNode<T>::~ListNode() = default;
 
 template <class T>
-LinkedList<T>::LinkedList() : Header{ new ListNode<T>() }
+LinkedList<T>::LinkedList() : Header{new ListNode<T>()}
 {
 }
 
 template <class T>
-LinkedList<T>::LinkedList(T& data) : Header{ new ListNode<T>(data) }
+LinkedList<T>::LinkedList(T& data) : Header{new ListNode<T>(data)}
 {
 }
 
 template <class T>
-LinkedList<T>::LinkedList(const int length, T* data) : Header{ new ListNode<T>{ data[0] } }
+LinkedList<T>::LinkedList(const int length, T* data) : Header{new ListNode<T>{data[0]}}
 {
 	ListNode<T>* traversalNode = Header;
 	for (auto i = 1; i < length; i++)
@@ -215,14 +215,14 @@ LinkedList<T>::~LinkedList()
 }
 
 template <typename T>
-std::ostream& operator<<(std::ostream& stream, const KC::ListNode<T>& node)
+std::ostream& operator<<(std::ostream& stream, const ListNode<T>& node)
 {
 	std::cout << node.Data;
 	return stream;
 }
 
 template <typename T>
-std::ostream& operator<<(std::ostream& stream, const KC::LinkedList<T>& list)
+std::ostream& operator<<(std::ostream& stream, const LinkedList<T>& list)
 {
 	auto length = list.Length();
 	for (auto i = 0; i < length; i++)

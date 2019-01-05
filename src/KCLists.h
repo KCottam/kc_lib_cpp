@@ -15,8 +15,8 @@ namespace KC
 		explicit ListNode(T& data);
 		~ListNode();
 		// TODO: Add operator functions such as (T)=
+		// Add copy constructor
 		// const T operator=(const ListNode& node) takes data from node and puts it to T.
-		// TODO: Add copy constructor
 		// TODO: How to implement copy constructor?
 	};
 
@@ -42,12 +42,10 @@ namespace KC
 		T& GetIndex(int index) const;
 		~LinkedList();
 		// TODO: Add operator functions such as <<, (ListNode)=, >>
-		// TODO: Add copy constructor
+		// Add copy constructor
 	};
 
 	// TODO: Add CircleList class and related functions
-	// TODO: Add std::cout overrides
-
 }
 
 #endif // !KC_LISTS_H_
