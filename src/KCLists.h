@@ -48,4 +48,6 @@ namespace KC
 	// TODO: Add CircleList class and related functions
 }
 
+#include "KCLists.hpp"
+
 #endif // !KC_LISTS_H_

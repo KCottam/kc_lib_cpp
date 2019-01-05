@@ -7,12 +7,13 @@
 
 namespace KC
 {
-	static struct Core final
+	static class Core final
 	{
-		static unsigned int RandomizationSeed;
-		static void EnableConsoleColor();
-		static void ResizeCursor(unsigned int visible);
-		static void SetupKCLib();
+	public:
+		unsigned int RandomizationSeed;
+		void EnableConsoleColor();
+		void ResizeCursor(unsigned int visible);
+		void SetupKCLib();
 	} core;
 }
 
