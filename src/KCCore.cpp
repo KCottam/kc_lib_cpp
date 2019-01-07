@@ -4,7 +4,7 @@
 
 HANDLE kcStdout;
 
-void KC::Core::EnableConsoleColor()
+auto KC::Core::EnableConsoleColor() -> void
 {
 	DWORD dwMode = 0;
 	GetConsoleMode(kcStdout, &dwMode);
@@ -12,7 +12,7 @@ void KC::Core::EnableConsoleColor()
 	SetConsoleMode(kcStdout, dwMode);
 }
 
-void KC::Core::ResizeCursor(const unsigned int visible)
+auto KC::Core::ResizeCursor(const unsigned int visible) -> void
 {
 	CONSOLE_CURSOR_INFO info;
 	info.dwSize = visible ? visible : 10;
@@ -20,7 +20,7 @@ void KC::Core::ResizeCursor(const unsigned int visible)
 	SetConsoleCursorInfo(kcStdout, &info);
 }
 
-void KC::Core::SetupKCLib()
+auto KC::Core::SetupKCLib() -> void
 {
 	kcStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	RandomizationSeed = static_cast<unsigned int>(time(nullptr));

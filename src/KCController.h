@@ -7,7 +7,7 @@ namespace KC
 {
 	namespace Controller
 	{
-		enum InputFlag
+		enum class InputFlag : int
 		{
 			FlagReturn,
 			FlagEscape,
@@ -30,30 +30,21 @@ namespace KC
 			KeyReturn = '\r'
 		};
 
-		inline int Ctrl(const int key)
-		{
-			return (key - 96);
-		}
+		inline auto Ctrl(int key) -> int;
 
-		inline int KeyF(const int key)
-		{
-			return (key + 58);
-		}
+		inline auto KeyF(int key) -> int;
 
-		inline int CtrlKeyF(const int key)
-		{
-			return (key + 93);
-		}
+		inline auto CtrlKeyF(int key) -> int;
 
-		char ToUpper(char key);
+		auto ToUpper(char key) -> char;
 
-		char* ToUpper(char* string);
+		auto ToUpper(char* string) -> char*;
 
-		char ToLower(char key);
+		auto ToLower(char key) -> char;
 
-		char* ToLower(char* string);
+		auto ToLower(char* string) -> char*;
 
-		int GetKey(InputFlag& flag, time_t delay);
+		auto GetKey(InputFlag& flag, time_t delay) -> int;
 	}
 }
 

@@ -1,6 +1,21 @@
 #include "KCController.h"
 
-char KC::Controller::ToUpper(const char key)
+auto KC::Controller::Ctrl(const int key) -> int
+{
+	return (key - 96);
+}
+
+auto KC::Controller::KeyF(const int key) -> int
+{
+	return (key + 58);
+}
+
+auto KC::Controller::CtrlKeyF(const int key) -> int
+{
+	return (key + 93);
+}
+
+auto KC::Controller::ToUpper(const char key) -> char
 {
 	if (key > 'a' && key < 'z')
 	{
@@ -9,7 +24,7 @@ char KC::Controller::ToUpper(const char key)
 	return key;
 }
 
-char* KC::Controller::ToUpper(char* string)
+auto KC::Controller::ToUpper(char* string) -> char*
 {
 	for (auto i = 0; string[i] != '\0'; i++)
 	{
@@ -18,7 +33,7 @@ char* KC::Controller::ToUpper(char* string)
 	return string;
 }
 
-char KC::Controller::ToLower(const char key)
+auto KC::Controller::ToLower(const char key) -> char
 {
 	if (key > 'A' && key < 'Z')
 	{
@@ -27,7 +42,7 @@ char KC::Controller::ToLower(const char key)
 	return key;
 }
 
-char* KC::Controller::ToLower(char* string)
+auto KC::Controller::ToLower(char* string) -> char*
 {
 	for (auto i = 0; string[i] != '\0'; i++)
 	{
@@ -36,7 +51,12 @@ char* KC::Controller::ToLower(char* string)
 	return string;
 }
 
-int KC::Controller::GetKey(InputFlag& flag, const time_t delay)
+auto operator==(const int& key, const KC::Controller::InputFlag& rhs) -> bool
+{
+	return static_cast<int>(rhs) == key;
+}
+
+auto KC::Controller::GetKey(InputFlag& flag, const time_t delay) -> int
 {
 	if (delay)
 	{
@@ -46,17 +66,17 @@ int KC::Controller::GetKey(InputFlag& flag, const time_t delay)
 		}
 	}
 	const auto key = _getch();
-	if (key == FlagReturn)
+	if (key == InputFlag::FlagReturn)
 	{
-		flag = FlagEscape;
+		flag = InputFlag::FlagEscape;
 		return GetKey(flag, 0);
 	}
-	if (key == FlagNumpad)
+	if (key == InputFlag::FlagNumpad)
 	{
-		flag = FlagNumpad;
+		flag = InputFlag::FlagNumpad;
 		return GetKey(flag, 0);
 	}
-	if (flag == FlagEscape || flag == FlagNumpad)
+	if (flag == InputFlag::FlagEscape || flag == InputFlag::FlagNumpad)
 	{
 		switch (key)
 		{
@@ -84,6 +104,6 @@ int KC::Controller::GetKey(InputFlag& flag, const time_t delay)
 			return key;
 		}
 	}
-	flag = FlagReturn;
+	flag = InputFlag::FlagReturn;
 	return key;
 }

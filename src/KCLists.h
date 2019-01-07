@@ -7,17 +7,18 @@ namespace KC
 	class ListNode final
 	{
 	public:
-		T& Data;
-		ListNode* Next;
-		ListNode* Previous;
+		T Data;
+		ListNode<T>* Next;
+		ListNode<T>* Previous;
 
 		ListNode();
-		explicit ListNode(T& data);
+		ListNode(ListNode<T> const& other);
+		ListNode(ListNode<T>&& other) noexcept;
 		~ListNode();
-		// TODO: Add operator functions such as (T)=
-		// Add copy constructor
-		// const T operator=(const ListNode& node) takes data from node and puts it to T.
-		// TODO: How to implement copy constructor?
+		explicit ListNode(T& data);
+		auto operator=(T const& data) -> ListNode<T>&;
+		auto operator=(ListNode<T> const& other) -> ListNode<T>&;
+		auto operator=(ListNode<T>&& other) noexcept -> ListNode<T>&;
 	};
 
 	template <class T>
@@ -26,23 +27,27 @@ namespace KC
 		ListNode<T>* Header;
 	public:
 		LinkedList();
-		explicit LinkedList(T& data);
+		LinkedList(LinkedList<T>&& other) noexcept;
+		LinkedList(LinkedList<T> const& other);
 		LinkedList(int length, T* data);
-		ListNode<T>& GetHeader() const;
-		int Length() const;
-		void Push(T& data); // operator<<()
-		void Push(int length, T* data);
-		void Append(T& data);
-		void Append(int length, T* data);
-		void PushAt(int index, T& data);
-		void PushAt(int index, int length, T* data);
-		T Pull(); // operator>>()
-		T Pop();
-		T PullAt(int index);
-		T& GetIndex(int index) const;
 		~LinkedList();
-		// TODO: Add operator functions such as <<, (ListNode)=, >>
-		// Add copy constructor
+		explicit LinkedList(T& data);
+		auto GetHeader() const -> ListNode<T>&;
+		auto Length() const -> int;
+		auto Push(T& data) -> void; // operator<<()
+		auto Push(int length, T* data) -> void;
+		auto Append(T& data) -> void;
+		auto Append(int length, T* data) -> void;
+		auto PushAt(int index, T& data) -> void;
+		auto PushAt(int index, int length, T* data) -> void;
+		auto Pull() -> T; // operator>>()
+		auto Pop() -> T;
+		auto PullAt(int index) -> T;
+		auto GetIndex(int index) const -> T&;
+		auto operator=(LinkedList<T> const& other) -> LinkedList<T>&;
+		auto operator=(LinkedList<T>&& other) noexcept -> LinkedList<T>&;
+		auto operator<<(T const& data) -> LinkedList<T>&;
+		auto operator>>(T& data) const -> LinkedList<T>&;
 	};
 
 	// TODO: Add CircleList class and related functions
