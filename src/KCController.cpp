@@ -66,7 +66,7 @@ auto KC::Controller::GetKey(InputFlag& flag, const time_t delay) -> int
 		}
 	}
 	const auto key = _getch();
-	if (key == InputFlag::FlagReturn)
+	if (key == InputFlag::FlagReturn || key == InputFlag::FlagKeyReturn)
 	{
 		flag = InputFlag::FlagEscape;
 		return GetKey(flag, 0);

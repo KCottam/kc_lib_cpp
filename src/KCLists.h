@@ -51,7 +51,7 @@ namespace KC
 	};
 
 	// TODO: Add CircleList class and related functions
-}
+};
 
 #include "KCLists.hpp"
 

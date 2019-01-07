@@ -12,7 +12,8 @@ namespace KC
 			FlagReturn,
 			FlagEscape,
 			FlagNumpad,
-			FlagNormal
+			FlagNormal,
+			FlagKeyReturn = 224
 		};
 
 		enum InputKey

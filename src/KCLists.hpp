@@ -215,7 +215,7 @@ template <class T>
 auto LinkedList<T>::Pop() -> T
 {
 	ListNode<T>* traversalNode = Header;
-	ListNode<T> beforeTraversalNode;
+	ListNode<T>* beforeTraversalNode = Header;
 	while (traversalNode)
 	{
 		beforeTraversalNode = traversalNode;
@@ -231,7 +231,7 @@ template <class T>
 auto LinkedList<T>::PullAt(const int index) -> T
 {
 	ListNode<T>* traversalNode = Header;
-	ListNode<T>* beforeTraversalNode;
+	ListNode<T>* beforeTraversalNode = Header;
 	for (auto i = 0; i < index && traversalNode; i++)
 	{
 		beforeTraversalNode = traversalNode;
