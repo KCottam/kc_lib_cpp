@@ -32,12 +32,19 @@ namespace KC
 		};
 
 		inline auto Ctrl(int key) -> int;
+
 		inline auto KeyF(int key) -> int;
+
 		inline auto CtrlKeyF(int key) -> int;
+
 		auto ToUpper(char key) -> char;
+
 		auto ToUpper(char* string) -> char*;
+
 		auto ToLower(char key) -> char;
+
 		auto ToLower(char* string) -> char*;
+
 		auto GetKey(InputFlag& flag, time_t delay = 0) -> int;
 	}
 }

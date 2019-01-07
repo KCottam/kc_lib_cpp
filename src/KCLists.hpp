@@ -26,7 +26,7 @@ ListNode<T>::ListNode(ListNode<T>&& other) noexcept
 }
 
 template <typename T>
-ListNode<T>::ListNode(T& data) : Data{data}, Next(nullptr), Previous(nullptr)
+ListNode<T>::ListNode(T& data) : Data{ data }, Next(nullptr), Previous(nullptr)
 {
 }
 
@@ -59,7 +59,7 @@ auto ListNode<T>::operator=(ListNode<T>&& other) noexcept -> ListNode<T>&
 }
 
 template <class T>
-LinkedList<T>::LinkedList() : Header{new ListNode<T>()}
+LinkedList<T>::LinkedList() : Header{ new ListNode<T>() }
 {
 }
 
@@ -74,7 +74,7 @@ LinkedList<T>::LinkedList(LinkedList<T>&& other) noexcept
 template <class T>
 LinkedList<T>::LinkedList(LinkedList<T> const& other) : Header(new ListNode<T>(other.GetHeader().Data))
 {
-	auto length = other.Length();
+	auto length = other.GetLength();
 	for (auto i = 1; i < length; i++)
 	{
 		this->Append(other.GetIndex(i));
@@ -82,12 +82,12 @@ LinkedList<T>::LinkedList(LinkedList<T> const& other) : Header(new ListNode<T>(o
 }
 
 template <class T>
-LinkedList<T>::LinkedList(T& data) : Header{new ListNode<T>(data)}
+LinkedList<T>::LinkedList(T& data) : Header{ new ListNode<T>(data) }
 {
 }
 
 template <class T>
-LinkedList<T>::LinkedList(const int length, T* data) : Header{new ListNode<T>{data[0]}}
+LinkedList<T>::LinkedList(const int length, T* data) : Header{ new ListNode<T>{data[0]} }
 {
 	ListNode<T>* traversalNode = Header;
 	for (auto i = 1; i < length; i++)
@@ -104,7 +104,7 @@ auto LinkedList<T>::GetHeader() const -> ListNode<T>&
 }
 
 template <class T>
-auto LinkedList<T>::Length() const -> int
+auto LinkedList<T>::GetLength() const -> int
 {
 	ListNode<T>* traversalNode = Header;
 	if (!traversalNode)
@@ -242,7 +242,8 @@ auto LinkedList<T>::PullAt(const int index) -> T
 		return Pop();
 	}
 	T data = traversalNode->Data;
-	beforeTraversalNode->Next = nullptr;
+	traversalNode->Next->Previous = beforeTraversalNode;
+	beforeTraversalNode->Next = traversalNode->Next;
 	delete traversalNode;
 	return data;
 }
@@ -281,7 +282,7 @@ auto LinkedList<T>::operator=(LinkedList<T> const& other) -> LinkedList<T>&
 		Pull();
 	}
 	Header = new ListNode<T>(other.GetHeader().Data);
-	auto length = other.Length();
+	auto length = other.GetLength();
 	for (auto i = 1; i < length; i++)
 	{
 		this->Append(other.GetIndex(i));
@@ -299,7 +300,7 @@ auto LinkedList<T>::operator=(LinkedList<T>&& other) noexcept -> LinkedList<T>&
 			Pull();
 		}
 		Header = new ListNode<T>(other.GetHeader().Data);
-		auto length = other.Length();
+		auto length = other.GetLength();
 		for (auto i = 1; i < length; i++)
 		{
 			this->Append(other.GetIndex(i));
@@ -316,10 +317,20 @@ auto LinkedList<T>::operator<<(T const& data) -> LinkedList<T>&
 }
 
 template <class T>
-auto LinkedList<T>::operator >>(T& data) const -> LinkedList<T>&
+auto LinkedList<T>::operator >> (T& data) const -> LinkedList<T>&
 {
 	data = Pull();
 	return *this;
+}
+
+template <class T>
+auto LinkedList<T>::operator[](const unsigned int index) const -> T&
+{
+	if ((GetLength() - 1) > index)
+	{
+		throw std::out_of_range("Index is greater than the length of linked list!");
+	}
+	return GetIndex(index);
 }
 
 template <typename T>
@@ -332,7 +343,7 @@ auto operator<<(std::ostream& stream, const ListNode<T>& node) -> std::ostream&
 template <typename T>
 auto operator<<(std::ostream& stream, const LinkedList<T>& list) -> std::ostream&
 {
-	auto length = list.Length();
+	auto length = list.GetLength();
 	for (auto i = 0; i < length; i++)
 	{
 		std::cout << list.GetIndex(i) << std::endl;
