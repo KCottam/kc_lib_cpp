@@ -1,6 +1,6 @@
 Name: KCLib
 Author: Kace Cottam
-Version: 1.1.1b
+Version: 1.0.7b
 
 /////////////////////////////////////////////////////////////////////////////
 Contents:
@@ -13,13 +13,13 @@ I use "TODO:" comments to indicate parts of the source code I am planning to add
 I use "BUG:" comments to indicate parts of the source code where there is a bug that needs to be fixed.
 
 /////////////////////////////////////////////////////////////////////////////
-CHANGELOG 1.1.1b
+CHANGELOG 1.0.7b
 	Added enumerations to std::cout operator overload for lists.
 
-CHANGELOG 1.1.1
+CHANGELOG 1.0.7
 	Reformatted list length.
 
-CHANGELOG 1.1.0
+CHANGELOG 1.0.6
 	Reformatted using ReSharper C++
 	TODO: REMAKE kc_lists
 	Renamed all files to PascalCase to follow Microsoft coding guidelines.
