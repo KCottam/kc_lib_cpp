@@ -10,6 +10,7 @@ CHANGELOG
 Other notes:
 
 I use "TODO:" comments to indicate parts of the source code I am planning to add to or customize.
+I use "BUG:" comments to indicate parts of the source code where there is a bug that needs to be fixed.
 
 /////////////////////////////////////////////////////////////////////////////
 CHANGELOG 1.1.1

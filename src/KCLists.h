@@ -51,7 +51,6 @@ namespace KC
 		auto operator>>(T& data) const->LinkedList<T>&;
 		auto operator[](unsigned int index) const->T&;
 	};
-
 	// TODO: Add CircleList class and related functions
 };
 
