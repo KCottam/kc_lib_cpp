@@ -342,7 +342,7 @@ auto operator<<(std::ostream& stream, const LinkedList<T>& list) -> std::ostream
 	auto length = list.GetLength();
 	for (auto i = 0; i < length; i++)
 	{
-		std::cout << list.GetIndex(i) << std::endl;
+		std::cout << "(" << (i+1) << ") " << list.GetIndex(i) << std::endl;
 	}
 	return stream;
 }

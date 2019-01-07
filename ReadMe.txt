@@ -1,6 +1,6 @@
 Name: KCLib
 Author: Kace Cottam
-Version: 1.1.1
+Version: 1.1.1b
 
 /////////////////////////////////////////////////////////////////////////////
 Contents:
@@ -13,6 +13,9 @@ I use "TODO:" comments to indicate parts of the source code I am planning to add
 I use "BUG:" comments to indicate parts of the source code where there is a bug that needs to be fixed.
 
 /////////////////////////////////////////////////////////////////////////////
+CHANGELOG 1.1.1b
+	Added enumerations to std::cout operator overload for lists.
+
 CHANGELOG 1.1.1
 	Reformatted list length.
 
