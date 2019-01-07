@@ -25,7 +25,7 @@ namespace KC
 	class LinkedList final
 	{
 		ListNode<T>* Header;
-		int Length; // TODO: Add length modifiers.
+		int Length;
 	public:
 		LinkedList();
 		LinkedList(LinkedList<T>&& other) noexcept;

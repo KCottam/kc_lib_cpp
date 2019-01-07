@@ -12,6 +12,9 @@ Other notes:
 I use "TODO:" comments to indicate parts of the source code I am planning to add to or customize.
 
 /////////////////////////////////////////////////////////////////////////////
+CHANGELOG 1.1.1
+	Reformatted list length. Need to test.
+
 CHANGELOG 1.1.0
 	Reformatted using ReSharper C++
 	TODO: REMAKE kc_lists

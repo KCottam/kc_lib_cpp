@@ -4,6 +4,8 @@
 #include "KCLists.h"
 using namespace KC;
 
+#define LOG(message) std::cout << "LOG: " << message << std::endl;
+
 template <typename T>
 ListNode<T>::ListNode() : Data(nullptr), Next(nullptr), Previous(nullptr)
 {
@@ -59,7 +61,7 @@ auto ListNode<T>::operator=(ListNode<T>&& other) noexcept -> ListNode<T>&
 }
 
 template <class T>
-LinkedList<T>::LinkedList() : Header{ new ListNode<T>() }
+LinkedList<T>::LinkedList() : Header{ new ListNode<T>() }, Length(1)
 {
 }
 
@@ -72,7 +74,7 @@ LinkedList<T>::LinkedList(LinkedList<T>&& other) noexcept
 }
 
 template <class T>
-LinkedList<T>::LinkedList(LinkedList<T> const& other) : Header(new ListNode<T>(other.GetHeader().Data))
+LinkedList<T>::LinkedList(LinkedList<T> const& other) : Header(new ListNode<T>(other.GetHeader().Data)), Length(1)
 {
 	auto length = other.GetLength();
 	for (auto i = 1; i < length; i++)
@@ -82,12 +84,12 @@ LinkedList<T>::LinkedList(LinkedList<T> const& other) : Header(new ListNode<T>(o
 }
 
 template <class T>
-LinkedList<T>::LinkedList(T& data) : Header{ new ListNode<T>(data) }
+LinkedList<T>::LinkedList(T& data) : Header{ new ListNode<T>(data) }, Length(1)
 {
 }
 
 template <class T>
-LinkedList<T>::LinkedList(const int length, T* data) : Header{ new ListNode<T>{data[0]} }
+LinkedList<T>::LinkedList(const int length, T* data) : Header{ new ListNode<T>{data[0]} }, Length(length)
 {
 	ListNode<T>* traversalNode = Header;
 	for (auto i = 1; i < length; i++)
@@ -106,17 +108,7 @@ auto LinkedList<T>::GetHeader() const -> ListNode<T>&
 template <class T>
 auto LinkedList<T>::GetLength() const -> int
 {
-	ListNode<T>* traversalNode = Header;
-	if (!traversalNode)
-	{
-		return 0;
-	}
-	auto length = 0;
-	for (; traversalNode != nullptr; length++)
-	{
-		traversalNode = traversalNode->Next;
-	}
-	return length;
+	return Length;
 }
 
 template <class T>
@@ -128,6 +120,7 @@ auto LinkedList<T>::Push(T& data) -> void
 	{
 		Header->Next = previousHeader;
 	}
+	Length++;
 }
 
 template <class T>
@@ -154,9 +147,10 @@ auto LinkedList<T>::Append(T& data) -> void
 		beforeTraversalNode = traversalNode;
 		traversalNode = traversalNode->Next;
 	}
-	ListNode<T>* newNode = new ListNode<T>(data);
+	auto newNode = new ListNode<T>(data);
 	newNode->Previous = beforeTraversalNode;
 	beforeTraversalNode->Next = newNode;
+	Length++;
 }
 
 template <class T>
@@ -179,15 +173,14 @@ auto LinkedList<T>::PushAt(const int index, T& data) -> void
 	if (!traversalNode)
 	{
 		Push(data);
+		return;
 	}
-	else
-	{
-		ListNode<T>* newNode = new ListNode<T>(data);
-		newNode->Previous = traversalNode;
-		newNode->Next = traversalNode->Next;
-		newNode->Next->Previous = newNode;
-		traversalNode->Next = newNode;
-	}
+	ListNode<T>* newNode = new ListNode<T>(data);
+	newNode->Previous = traversalNode;
+	newNode->Next = traversalNode->Next;
+	newNode->Next->Previous = newNode;
+	traversalNode->Next = newNode;
+	Length++;
 }
 
 template <class T>
@@ -208,6 +201,7 @@ auto LinkedList<T>::Pull() -> T
 	ListNode<T>* oldHeader = Header;
 	Header = Header->Next;
 	delete oldHeader;
+	Length--;
 	return data;
 }
 
@@ -224,6 +218,7 @@ auto LinkedList<T>::Pop() -> T
 	beforeTraversalNode->Next = nullptr;
 	T data = traversalNode->Data;
 	delete traversalNode;
+	Length--;
 	return data;
 }
 
@@ -245,6 +240,7 @@ auto LinkedList<T>::PullAt(const int index) -> T
 	traversalNode->Next->Previous = beforeTraversalNode;
 	beforeTraversalNode->Next = traversalNode->Next;
 	delete traversalNode;
+	Length--;
 	return data;
 }
 
@@ -303,7 +299,7 @@ auto LinkedList<T>::operator=(LinkedList<T>&& other) noexcept -> LinkedList<T>&
 		auto length = other.GetLength();
 		for (auto i = 1; i < length; i++)
 		{
-			this->Append(other.GetIndex(i));
+			Append(other.GetIndex(i));
 		}
 	}
 	return *this;
