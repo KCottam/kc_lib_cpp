@@ -44,7 +44,7 @@ namespace KC
 
 		auto ToLower(char* string) -> char*;
 
-		auto GetKey(InputFlag& flag, time_t delay) -> int;
+		auto GetKey(InputFlag& flag, time_t delay = 0) -> int;
 	}
 }
 

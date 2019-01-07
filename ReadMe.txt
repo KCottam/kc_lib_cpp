@@ -16,6 +16,9 @@ CHANGELOG 1.1.0
 	Reformatted using ReSharper C++
 	TODO: REMAKE kc_lists
 	Renamed all files to PascalCase to follow Microsoft coding guidelines.
+	Added some operator functions
+	Switched to trailing return types for better alignment and thus readability
+	Made InputFlag into an enum class
 
 CHANGELOG 1.0.5
 	Reformatted kc_lists to use templates.
