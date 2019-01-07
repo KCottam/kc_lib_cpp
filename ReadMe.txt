@@ -1,167 +1,29 @@
+Name: KCLib
+Author: Kace Cottam
+Version: 1.1.1
+
 /////////////////////////////////////////////////////////////////////////////
 Contents:
-kc_lib_cpp Project Overview
-kc_core Module Overview
-kc_colors Module Overview
-kc_controller Module Overview
-kc_lists Module Overview
 Other notes
 CHANGELOG
-/////////////////////////////////////////////////////////////////////////////
-========================================================================
-	STATIC LIBRARY : kc_lib_cpp Project Overview (Version 1.0.5)
-========================================================================
-
-kc_core.h, kc_core.cpp
-	Contains core setup functions as well as the wrapper definition.
-
-kc_colors.h
-	Contains color functions and defines.
-
-kc_controller.h, kc_controller.cpp
-	Contains controller functions and defines.
-
-kc_lists.h, kc_lists.cpp
-	Contains list classes and functions.
-
-TODO: kc_gui
-TODO: kc_gui_controls
-TODO: kc_multithreading
-
-========================================================================
-	MODULES: kc_core Module Overview
-========================================================================
-
-Holds many functions for running the wrapper that is kc_lib_cpp.
-
-kc::core::kc_seed
-	This is the number value used to seed the random function srand().
-
-kc::core::enableConsoleColor(void)
-	This is a function that enables use of colors in the terminal.
-
-kc::core::resizeCursor(unsigned int)
-	This is a function that changes the cursor size from 0% to 100%. Used in games 
-	where I do not allow a cursor.
-
-kc::core::SetupKCLib(void)
-	This runs commands such as kc::core::enableConsoleColor()
-	and sets the value of kc::core::kc_seed.
-
-========================================================================
-	MODULES: kc_colors Module Overview
-========================================================================
-
-Has text color and style definitions. Also has console manipulation functions and defines.
-
-kc::colors::
-	Has const char * variables for various colors.
-
-kc::formatting::
-	Has const char * variables for manipulating the console output.
-
-kc::highlights::
-	Has const char * variables for various highlights.
-
-kc::styles::
-	Has const char * variables for various font styles such as bold.
-
-========================================================================
-	MODULES: kc_controller Module Overview
-========================================================================
-
-Has functions for getting user input.
-
-kc::controller::Flag
-	The inputted flag variable becomes one of these when using get_key().
-
-kc::controller::Key
-	Has outputs for get_key().
-	
-kc::controller::get_key(Flag&, time_t)
-	Gets a key that a user presses and returns it. Similar to _getch(), but modified.
-	The second parameter is a delay in ms. Use 0 for no delay.
-
-kc::controller::toUpper(char), kc::controller::toUpper(char *)
-	Capitalizes a string or char.
-
-kc::controller::toLower(char), kc::controller::toLower(char *)
-	Lowercases a string or char.
-
-========================================================================
-	MODULES: kc_lists Module Overview
-========================================================================
-
-Has classes and functions for making linked lists of generic data.
-
-kc::Node<T>
-	A class for each node of a linked lists.
-
-	Private:
-	kc::Node<T>::data
-		Data of each node
-	kc::Node<T>::next
-		The next node of the linked list. Is 0 if there is no next node.
-	kc::Node<T>::previous
-		The previous node of the linked list. Is 0 if there is no previous node.
-
-	Public:
-	kc::Node::Node(void), kc::Node::Node(const T&)
-		Initializes a node. If data is specified, then makes the node with that data.
-	kc::Node::getData(void)
-		Returns the data of a node.
-	kc::Node::setData(const T&)
-		Sets the data of a node.
-	kc::Node::getNext(void)
-		Gets the next node of the linked list.
-	kc::Node::setNext(kc::Node&)
-		Sets the next node of the linked list. Have caution so memory isn't wasted!
-	kc::Node::getPrevious(void)
-		Gets the previous node of the linked list.
-	kc::Node::SetPrevious(kc::Node&)
-		Sets the previous node of the linked list. Have caution so memory isn't wasted!
-	kc::Node::~Node(void)
-		Does nothing.
-
-kc::List<T>
-	A class for a linked list.
-
-	Private:
-	kc::List::header
-		The header node of a linked list.
-
-	Public:
-	kc::List::List(void), kc::List::List(const T&), kc::List::List(int, const T[])
-		Initializes a linked list with any values given. int is for how many values are being initialized.
-	kc::List::getHeader(void)
-		Retrieves the header of the linked list.
-	kc::List::length(void)
-		Gets the length of the linked list.
-	kc::List::push(const T&), kc::List::push(const int, const T[])
-		Adds new data to the linked list at the beginning of it.
-	kc::List::append(const T&), kc::List::append(const int, const T[])
-		Adds new data to the linked list at the end of it.
-	kc::List::push_at(const int, const T&), kc::List::push_at(const int, const int, const T[])
-		Adds new data to the linked list at the index of the first parameter.
-	kc::List::pull(void)
-		Deletes the first node of the linked list and returns the data inside of it.
-	kc::List::pop(void)
-		Deletes the last node of the linked list and returns the data inside of it.
-	kc::List::pull_at(const int)
-		Deletes the specified node of the linked list and returns the data inside of it.
-	kc::List::getIndex(const int)
-		Gets the data of the node at the specified index without deleting the node.
-	kc::List:~List(void)
-		Deletes all nodes of the list before deallocating the memory of the list.
-
-TODO: kc::CircleList definitions and comments
-
 /////////////////////////////////////////////////////////////////////////////
 Other notes:
 
 I use "TODO:" comments to indicate parts of the source code I am planning to add to or customize.
+I use "BUG:" comments to indicate parts of the source code where there is a bug that needs to be fixed.
 
 /////////////////////////////////////////////////////////////////////////////
+CHANGELOG 1.1.1
+	Reformatted list length.
+
+CHANGELOG 1.1.0
+	Reformatted using ReSharper C++
+	TODO: REMAKE kc_lists
+	Renamed all files to PascalCase to follow Microsoft coding guidelines.
+	Added some operator functions
+	Switched to trailing return types for better alignment and thus readability
+	Made InputFlag into an enum class
+
 CHANGELOG 1.0.5
 	Reformatted kc_lists to use templates.
 	Also started using more references and const.

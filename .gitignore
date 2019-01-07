@@ -50,3 +50,5 @@
 /Debug/kc_lib_cpp.log
 /Debug/kc_lib_cpp.idb
 /debug.log
+/Release
+/bin/intermediates/Win32/Release
