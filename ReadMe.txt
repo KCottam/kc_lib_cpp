@@ -13,7 +13,7 @@ I use "TODO:" comments to indicate parts of the source code I am planning to add
 
 /////////////////////////////////////////////////////////////////////////////
 CHANGELOG 1.1.1
-	Reformatted list length. Need to test.
+	Reformatted list length.
 
 CHANGELOG 1.1.0
 	Reformatted using ReSharper C++
