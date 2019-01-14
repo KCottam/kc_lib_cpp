@@ -68,13 +68,13 @@ LinkedList<T>::LinkedList() : Header{ new ListNode<T>() }, Length(1)
 template <class T>
 LinkedList<T>::LinkedList(LinkedList<T>&& other) noexcept
 {
-	Header = other.GetHeader();
+	Header = other.Begin();
 	other.Pull();
 	return *this;
 }
 
 template <class T>
-LinkedList<T>::LinkedList(LinkedList<T> const& other) : Header(new ListNode<T>(other.GetHeader().Data)), Length(1)
+LinkedList<T>::LinkedList(LinkedList<T> const& other) : Header(new ListNode<T>(other.Begin().Data)), Length(1)
 {
 	auto length = other.GetLength();
 	for (auto i = 1; i < length; i++)
@@ -100,9 +100,20 @@ LinkedList<T>::LinkedList(const int length, T* data) : Header{ new ListNode<T>{d
 }
 
 template <class T>
-auto LinkedList<T>::GetHeader() const -> ListNode<T>&
+auto LinkedList<T>::Begin() const -> ListNode<T>&
 {
 	return Header;
+}
+
+template <class T>
+auto LinkedList<T>::End() const -> ListNode<T>&
+{
+	ListNode<T>* traversalNode = Header;
+	while(traversalNode->Next)
+	{
+		traversalNode = traversalNode->Next;
+	}
+	return traversalNode;
 }
 
 template <class T>
@@ -140,16 +151,10 @@ auto LinkedList<T>::Append(T& data) -> void
 		Push(data);
 		return;
 	}
-	ListNode<T>* traversalNode = Header;
-	ListNode<T>* beforeTraversalNode = nullptr;
-	while (traversalNode)
-	{
-		beforeTraversalNode = traversalNode;
-		traversalNode = traversalNode->Next;
-	}
+	ListNode<T>* beforeEndNode = End().Previous;
 	auto newNode = new ListNode<T>(data);
-	newNode->Previous = beforeTraversalNode;
-	beforeTraversalNode->Next = newNode;
+	newNode->Previous = beforeEndNode;
+	beforeEndNode->Next = newNode;
 	Length++;
 }
 
@@ -208,16 +213,11 @@ auto LinkedList<T>::Pull() -> T
 template <class T>
 auto LinkedList<T>::Pop() -> T
 {
-	ListNode<T>* traversalNode = Header;
-	ListNode<T>* beforeTraversalNode = Header;
-	while (traversalNode)
-	{
-		beforeTraversalNode = traversalNode;
-		traversalNode = traversalNode->Next;
-	}
-	beforeTraversalNode->Next = nullptr;
-	T data = traversalNode->Data;
-	delete traversalNode;
+	auto endNode = End();
+	auto beforeEndNode = endNode.Previous;
+	T data = endNode.Data;
+	delete &endNode;
+	beforeEndNode.Next = nullptr;
 	Length--;
 	return data;
 }
@@ -277,7 +277,7 @@ auto LinkedList<T>::operator=(LinkedList<T> const& other) -> LinkedList<T>&
 	{
 		Pull();
 	}
-	Header = new ListNode<T>(other.GetHeader().Data);
+	Header = new ListNode<T>(other.Begin().Data);
 	auto length = other.GetLength();
 	for (auto i = 1; i < length; i++)
 	{
@@ -295,7 +295,7 @@ auto LinkedList<T>::operator=(LinkedList<T>&& other) noexcept -> LinkedList<T>&
 		{
 			Pull();
 		}
-		Header = new ListNode<T>(other.GetHeader().Data);
+		Header = new ListNode<T>(other.Begin().Data);
 		auto length = other.GetLength();
 		for (auto i = 1; i < length; i++)
 		{

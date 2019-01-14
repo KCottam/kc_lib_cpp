@@ -33,7 +33,8 @@ namespace KC
 		LinkedList(int length, T* data);
 		~LinkedList();
 		explicit LinkedList(T& data);
-		auto GetHeader() const->ListNode<T>&;
+		auto Begin() const->ListNode<T>&;
+		auto End() const->ListNode<T>&;
 		auto GetLength() const -> int;
 		auto Push(T& data) -> void;
 		auto Push(int length, T* data) -> void; 
@@ -51,7 +52,15 @@ namespace KC
 		auto operator>>(T& data) const->LinkedList<T>&;
 		auto operator[](unsigned int index) const->T&;
 	};
-	// TODO: Add CircleList class and related functions
+	template <class T>
+	class CircleClist final
+	{
+		ListNode<T>* Header;
+		int Length;
+	public:
+		CicleList();
+		CircleList(LinkedList<T>&&other) noexcept;
+	};
 };
 
 #include "KCLists.hpp"
