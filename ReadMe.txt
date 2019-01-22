@@ -1,6 +1,6 @@
 Name: KCLib
 Author: Kace Cottam
-Version: 1.0.7b
+Version: 1.0.9
 
 /////////////////////////////////////////////////////////////////////////////
 Contents:
@@ -13,6 +13,9 @@ I use "TODO:" comments to indicate parts of the source code I am planning to add
 I use "BUG:" comments to indicate parts of the source code where there is a bug that needs to be fixed.
 
 /////////////////////////////////////////////////////////////////////////////
+CHANGELOG 1.0.9
+	Added circle lists.
+
 CHANGELOG 1.0.8
 	Added Begin() and End() functions to linked lists, which grab their respective node.
 
