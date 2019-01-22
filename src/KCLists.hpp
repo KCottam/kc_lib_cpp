@@ -4,8 +4,6 @@
 #include "KCLists.h"
 using namespace KC;
 
-#define LOG(message) std::cout << "LOG: " << message << std::endl;
-
 template <typename T>
 ListNode<T>::ListNode() : Data(nullptr), Next(nullptr), Previous(nullptr)
 {
@@ -504,8 +502,6 @@ CircleList<T>::CircleList(LinkedList<T>&& other) noexcept : Header{ other.Header
 	other.Length = 0;
 }
 
-
-
 template <typename T>
 auto operator<<(std::ostream& stream, const ListNode<T>& node) -> std::ostream&
 {
@@ -515,6 +511,17 @@ auto operator<<(std::ostream& stream, const ListNode<T>& node) -> std::ostream&
 
 template <typename T>
 auto operator<<(std::ostream& stream, const LinkedList<T>& list) -> std::ostream&
+{
+	auto length = list.GetLength();
+	for (auto i = 0; i < length; i++)
+	{
+		std::cout << "(" << (i + 1) << ") " << list.GetIndex(i) << std::endl;
+	}
+	return stream;
+}
+
+template <typename T>
+auto operator<<(std::ostream& stream, const CircleList<T>& list) -> std::ostream&
 {
 	auto length = list.GetLength();
 	for (auto i = 0; i < length; i++)
