@@ -68,9 +68,10 @@ LinkedList<T>::LinkedList() : Header{ new ListNode<T>() }, Length(1)
 template <class T>
 LinkedList<T>::LinkedList(LinkedList<T>&& other) noexcept
 {
-	Header = other.Begin();
-	other.Pull();
-	return *this;
+	Header = other.Header;
+	Length = other.Length;
+	other.Header = nullptr;
+	other.Length = nullptr;
 }
 
 template <class T>
@@ -109,7 +110,7 @@ template <class T>
 auto LinkedList<T>::End() const -> ListNode<T>&
 {
 	ListNode<T>* traversalNode = Header;
-	while(traversalNode->Next)
+	while (traversalNode->Next)
 	{
 		traversalNode = traversalNode->Next;
 	}
@@ -130,6 +131,7 @@ auto LinkedList<T>::Push(T& data) -> void
 	if (previousHeader)
 	{
 		Header->Next = previousHeader;
+		previousHeader->Previous = Header;
 	}
 	Length++;
 }
@@ -329,6 +331,181 @@ auto LinkedList<T>::operator[](const unsigned int index) const -> T&
 	return GetIndex(index);
 }
 
+template <class T>
+CircleList<T>::CircleList()
+{
+}
+
+template <class T>
+CircleList<T>::CircleList(CircleList<T> const& other)
+{
+	this->Header = other.Header;
+	auto length = other.GetLength();
+	for (auto i = 1; i < length; i++)
+	{
+		this->Append(other.GetIndex(i));
+	}
+}
+
+template <class T>
+CircleList<T>::CircleList(CircleList<T>&& other) noexcept
+{
+	this->Header = other.Header;
+	this->Length = other.Length;
+	other.Header = nullptr;
+	other.Length = nullptr;
+}
+
+template <class T>
+CircleList<T>::CircleList(LinkedList<T> const& other) : LinkedList<T>(other)
+{
+	this->Begin()->Previous = this->End();
+	this->End()->Next = this->Begin();
+}
+
+template <class T>
+CircleList<T>::CircleList(const int length, T* data) : LinkedList<T>(length, data)
+{
+	this->Begin()->Previous = this->End();
+	this->End()->Next = this->Begin();
+}
+
+template <class T>
+CircleList<T>::~CircleList()
+{
+}
+
+template <class T>
+CircleList<T>::CircleList(T& data) : LinkedList<T>(data)
+{
+	this->Begin()->Previous = this->End();
+	this->End()->Next = this->Begin();
+}
+
+template <class T>
+auto CircleList<T>::Push(T& data) -> void
+{
+	ListNode<T>* previousHeader = this->Header;
+	this->Header = new ListNode<T>(data);
+	this->Header->Next = this->Header;
+	this->Header->Previous = this->Header;
+	if (previousHeader)
+	{
+		this->Header->Previous = previousHeader->Previous;
+		previousHeader->Previous->Next = this->Header;
+		this->Header->Next = previousHeader;
+		previousHeader->Previous = this->Header;
+	}
+	++this->Length;
+}
+
+template <class T>
+auto CircleList<T>::Push(const int length, T* data) -> void
+{
+	for (auto i = 0; i < length; i++)
+	{
+		Push(data);
+	}
+}
+
+template <class T>
+auto CircleList<T>::Pull() -> T
+{
+	if (!this->Header)
+		return 0;
+	T data = this->Header->Data;
+	ListNode<T>* oldHeader = this->Header;
+	this->Header = this->Header->Next;
+	delete oldHeader;
+	--this->Length;
+	return data;
+}
+
+template <class T>
+auto CircleList<T>::operator=(LinkedList<T> const& other) -> CircleList<T>&
+{
+	while (this->Header)
+	{
+		Pull();
+	}
+	this->Header = new ListNode<T>(other.Begin().Data);
+	auto length = other.GetLength();
+	for (auto i = 1; i < length; i++)
+	{
+		Push(other.GetIndex(i));
+	}
+	this->Begin()->Previous = this->End();
+	this->End()->Next = this->Begin();
+	return *this;
+}
+
+template <class T>
+auto CircleList<T>::operator=(LinkedList<T>&& other) noexcept -> CircleList<T>&
+{
+	this->Header = other.Header;
+	this->Length = other.Length;
+	other.Header = nullptr;
+	other.Length = nullptr;
+	return *this;
+}
+
+template <class T>
+auto CircleList<T>::operator=(CircleList<T> const& other) -> CircleList<T>&
+{
+	while (this->Header)
+	{
+		Pull();
+	}
+	this->Header = new ListNode<T>(other.Begin().Data);
+	auto length = other.GetLength();
+	for (auto i = 1; i < length; i++)
+	{
+		Push(other.GetIndex(i));
+	}
+	return *this;
+}
+
+template <class T>
+auto CircleList<T>::operator=(CircleList<T>&& other) noexcept -> CircleList<T>&
+{
+	this->Header = other.Header;
+	this->Length = other.Length;
+	other.Header = nullptr;
+	other.Length = nullptr;
+	return *this;
+}
+
+template <class T>
+auto CircleList<T>::operator<<(T const& data) -> LinkedList<T>&
+{
+	Push(data);
+	return *this;
+}
+
+template <class T>
+auto CircleList<T>::operator>>(T& data) const -> LinkedList<T>&
+{
+	data = Pull();
+	return *this;
+}
+
+template <class T>
+auto CircleList<T>::operator[](unsigned int const index) const -> T&
+{
+	return this->GetIndex(index);
+}
+
+template <class T>
+CircleList<T>::CircleList(LinkedList<T>&& other) noexcept : Header{ other.Header }, Length{ other.Length }
+{
+	other.End().Next = other.Begin();
+	other.Begin().Previous = other.End();
+	other.Header = nullptr;
+	other.Length = 0;
+}
+
+
+
 template <typename T>
 auto operator<<(std::ostream& stream, const ListNode<T>& node) -> std::ostream&
 {
@@ -342,7 +519,7 @@ auto operator<<(std::ostream& stream, const LinkedList<T>& list) -> std::ostream
 	auto length = list.GetLength();
 	for (auto i = 0; i < length; i++)
 	{
-		std::cout << "(" << (i+1) << ") " << list.GetIndex(i) << std::endl;
+		std::cout << "(" << (i + 1) << ") " << list.GetIndex(i) << std::endl;
 	}
 	return stream;
 }
