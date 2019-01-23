@@ -1,11 +1,10 @@
-#ifndef KC_COLORS_H_
-#define KC_COLORS_H_
+#ifndef KC_COLORS_H
+#define KC_COLORS_H
 
 namespace KC
 {
 	namespace Formatting
 	{
-		const char* reset = "\x1b[0m";
 		const char* deleteLine = "\33[2K\r";
 		const char* cursorUp = "\33[1A";
 		const char* cursorDown = "\33[1B";
@@ -18,10 +17,12 @@ namespace KC
 		const char* bold = "\x1b[1m";
 		const char* underline = "\x1b[4m";
 		const char* inverse = "\x1b[7m";
+		const char* reset = "\x1b[0m";
 	}
 
 	namespace Colors
 	{
+		const char* reset = "\x1b[0m";
 		namespace Weak
 		{
 			const char* black = "\x1b[30m";
@@ -75,6 +76,6 @@ namespace KC
 	}
 }
 
-#define COLORIZE(color, code) {cout << (color); {code}; cout << RESET;}
+#define COLORIZE(color, code) {std::cout << (color); code; std::cout << KC::Formatting::reset;}
 
-#endif // !KC_COLORS_H_
+#endif // !KC_COLORS_H

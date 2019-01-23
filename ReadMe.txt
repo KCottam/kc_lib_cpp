@@ -1,6 +1,6 @@
 Name: KCLib
 Author: Kace Cottam
-Version: 1.0.9
+Version: 1.0.10
 
 /////////////////////////////////////////////////////////////////////////////
 Contents:
@@ -13,6 +13,12 @@ I use "TODO:" comments to indicate parts of the source code I am planning to add
 I use "BUG:" comments to indicate parts of the source code where there is a bug that needs to be fixed.
 
 /////////////////////////////////////////////////////////////////////////////
+CHANGELOG 1.0.10
+	Reformatted lists to make Linked Lists and Circle Lists a derived class of Lists<T>
+	Added List<T>, CircleList<T>, LinkedList<T>
+	Moved CircleList<T> to KCCircleLists.h,.hpp
+	Moved LinkedList<T> to KCLinkedLists.h,.hpp
+
 CHANGELOG 1.0.9
 	Added circle lists.
 

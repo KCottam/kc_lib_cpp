@@ -1,5 +1,5 @@
-#ifndef KC_CONTROLLER_H_
-#define KC_CONTROLLER_H_
+#ifndef KC_CONTROLLER_H
+#define KC_CONTROLLER_H
 #include <ctime>
 #include <conio.h>
 
@@ -16,7 +16,7 @@ namespace KC
 			FlagKeyReturn = 224
 		};
 
-		enum InputKey
+		enum InputKey : int
 		{
 			KeyUpArrow = -'U',
 			KeyDownArrow = -'D',
@@ -49,4 +49,4 @@ namespace KC
 	}
 }
 
-#endif // !KC_CONTROLLER_H_
+#endif // !KC_CONTROLLER_H

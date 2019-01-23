@@ -1,5 +1,5 @@
-#ifndef KC_CORE_H_
-#define KC_CORE_H_
+#ifndef KC_CORE_H
+#define KC_CORE_H
 
 #ifndef ENABLE_VIRTUAL_TERMINAL_PROCESSING
 #define ENABLE_VIRTUAL_TERMINAL_PROCESSING 0x0004
@@ -17,4 +17,4 @@ namespace KC
 }
 
 
-#endif // !KC_CORE_H_
+#endif // !KC_CORE_H
