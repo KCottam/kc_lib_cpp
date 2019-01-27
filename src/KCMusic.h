@@ -11,7 +11,7 @@ namespace KC
 				196, 220, 246, 261, 293, 329, 349, 392, 440, 493, 523, 587, 659, 698, 783, 880, 987, 1046, 1174, 1318, 1396,
 				1567, 1760, 1975, 2093, 2349, 2637, 2793, 3135, 3520, 3951, 4186, 4698 };
 		public:
-			int FetchTone(const int row, const int column, const int noteOffset = 0) const;
+			int FetchTone(int row, int column, int noteOffset = 0) const;
 		} tone;
 		//This is not needed, it is just used for mapping to Tone::TONE_VALUES.Value
 		enum class NoteTonesIndeces : int
@@ -42,8 +42,8 @@ namespace KC
 		public:
 			static void PlayString(std::string& buffer, int timeInBetweenNotes);
 			MusicFile() = delete;
-			explicit MusicFile(const std::string& buffer);
-			explicit MusicFile(std::string&& buffer);
+			explicit MusicFile(const std::string& filename);
+			explicit MusicFile(std::string&& filename);
 			void ParseMusicFile(const std::string& fileName);
 			auto Play(DWORD timeToWaitInBetweenNotes = 0) const -> void;
 		};

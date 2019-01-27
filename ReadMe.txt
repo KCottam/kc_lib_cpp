@@ -1,6 +1,6 @@
 Name: KCLib
 Author: Kace Cottam
-Version: 1.0.11
+Version: 1.0.12
 
 /////////////////////////////////////////////////////////////////////////////
 Contents:
@@ -13,6 +13,10 @@ I use "TODO:" comments to indicate parts of the source code I am planning to add
 I use "BUG:" comments to indicate parts of the source code where there is a bug that needs to be fixed.
 
 /////////////////////////////////////////////////////////////////////////////
+CHANGELOG 1.0.12
+	Changed KCColors::COLORIZE to become a function with a lambda input.
+	Made function changes so code is more readable.
+
 CHANGELOG 1.0.11
 	Added KCMusic.h,.cpp, a module made to produce music using the windows Beep() function.
 

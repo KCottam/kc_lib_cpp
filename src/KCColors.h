@@ -74,8 +74,9 @@ namespace KC
 			const char* white = "\x1b[107m";
 		}
 	}
+
+	auto Colorize(char* color, void (*function)(void)) -> void;
 }
 
-#define COLORIZE(color, code) {std::cout << (color); code; std::cout << KC::Formatting::reset;}
 
 #endif // !KC_COLORS_H

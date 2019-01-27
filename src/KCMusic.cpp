@@ -110,16 +110,16 @@ void KC::MusicFile::PlayString(std::string& buffer, const int timeInBetweenNotes
 	remove("temp.music");
 }
 
-KC::MusicFile::MusicFile(const std::string& buffer): Buffer(""), WholeNoteDuration(0), HalfNoteDuration(0),
+KC::MusicFile::MusicFile(const std::string& filename): Buffer(""), WholeNoteDuration(0), HalfNoteDuration(0),
 															QuarterNoteDuration(0), EighthNoteDuration(0)
 {
-	ParseMusicFile(buffer);
+	ParseMusicFile(filename);
 }
 
-KC::MusicFile::MusicFile(std::string&& buffer): Buffer(""), WholeNoteDuration(0), HalfNoteDuration(0),
+KC::MusicFile::MusicFile(std::string&& filename): Buffer(""), WholeNoteDuration(0), HalfNoteDuration(0),
 													   QuarterNoteDuration(0), EighthNoteDuration(0)
 {
-	ParseMusicFile(buffer);
+	ParseMusicFile(filename);
 }
 
 void KC::MusicFile::ParseMusicFile(const std::string& fileName)
@@ -203,7 +203,7 @@ void KC::MusicFile::ParseMusicFile(const std::string& fileName)
 
 auto KC::MusicFile::Play(const DWORD timeToWaitInBetweenNotes) const -> void
 {
-	DWORD TimeToWaitInBetweenNotes = timeToWaitInBetweenNotes;
+	auto noteTime = timeToWaitInBetweenNotes;
 	std::stringstream playStream(Buffer);
 	std::string note = "Initialized";
 	int openLoopPosition = 0;
@@ -217,7 +217,7 @@ auto KC::MusicFile::Play(const DWORD timeToWaitInBetweenNotes) const -> void
 		switch (note[0])
 		{
 		case '+':
-			TimeToWaitInBetweenNotes = (DWORD)(timeToWaitInBetweenNotes * 0);
+			noteTime = (DWORD)(timeToWaitInBetweenNotes * 0);
 			break;
 		case '[':
 			if (!openLoopPosition)
@@ -265,16 +265,16 @@ auto KC::MusicFile::Play(const DWORD timeToWaitInBetweenNotes) const -> void
 			if (note[indexOffset] == '0')
 			{
 				Sleep((DWORD)(durationOffset * *(&WholeNoteDuration + ConvertNoteToIndex((Note)note[indexOffset + 1])) +
-					(TimeToWaitInBetweenNotes * sleepOffset)));
+					(noteTime * sleepOffset)));
 			}
 			else
 			{
 				PlayNote(tone.FetchTone(std::stoi(&note[indexOffset + 1]), note[indexOffset], noteOffset),
 				         (DWORD)(durationOffset * *(&WholeNoteDuration + ConvertNoteToIndex((Note)note[indexOffset + 2])
 				         )),
-				         (DWORD)(TimeToWaitInBetweenNotes * sleepOffset));
+				         (DWORD)(noteTime * sleepOffset));
 			}
-			TimeToWaitInBetweenNotes = timeToWaitInBetweenNotes;
+			noteTime = timeToWaitInBetweenNotes;
 			break;
 		}
 	}
