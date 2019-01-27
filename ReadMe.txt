@@ -1,6 +1,6 @@
 Name: KCLib
 Author: Kace Cottam
-Version: 1.0.10
+Version: 1.0.11
 
 /////////////////////////////////////////////////////////////////////////////
 Contents:
@@ -13,6 +13,9 @@ I use "TODO:" comments to indicate parts of the source code I am planning to add
 I use "BUG:" comments to indicate parts of the source code where there is a bug that needs to be fixed.
 
 /////////////////////////////////////////////////////////////////////////////
+CHANGELOG 1.0.11
+	Added KCMusic.h,.cpp, a module made to produce music using the windows Beep() function.
+
 CHANGELOG 1.0.10
 	Reformatted lists to make Linked Lists and Circle Lists a derived class of Lists<T>
 	Added List<T>, CircleList<T>, LinkedList<T>
